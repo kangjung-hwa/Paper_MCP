@@ -1,0 +1,12 @@
+seed: 42
+theta: 0.05
+lambda: 0.25
+eta: 0.1
+xi: 0.1
+metadata_mode: full
+task_path: data/tasks/tasks_seed42.jsonl
+model_name: deterministic-planner
+temperature: 0.0
+max_tool_calls: 20
+max_agent_calls: 6
+timeout_ms: 10000

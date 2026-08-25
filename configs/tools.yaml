@@ -1,0 +1,9 @@
+metadata_modes:
+  full: public metadata includes execution conditions
+  partial: public metadata includes schema and semantic types only; oracle retains hidden conditions
+repair_cost_betas:
+  latency: 0.25
+  tool_calls: 0.25
+  agent_calls: 0.25
+  workflow_modification: 0.25
+deficit_weights: uniform
