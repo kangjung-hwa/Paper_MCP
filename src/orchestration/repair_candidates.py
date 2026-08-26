@@ -17,13 +17,13 @@ class RepairCandidate:
         return asdict(self)
 
 
-def candidates_for_workflow(workflow: Workflow, risk_edges: list[dict], max_len: int = 3) -> list[RepairCandidate]:
+def candidates_for_workflow(workflow: Workflow, risk_edges: list[dict], artifacts: dict | None = None, max_len: int = 3) -> list[RepairCandidate]:
     mapping = {
-        "reference_frame": ["T09", "T25", "T26"],
+        "reference_frame": ["T09", "T26"],
         "unit": ["T10"],
         "freshness": ["T11", "T12", "T27", "T28"],
-        "confidence": ["T14", "T13", "T26", "T28"],
-        "provenance": ["T15", "T26", "T28"],
+        "confidence": ["T03", "T13", "T14"],
+        "provenance": ["T15", "T28"],
     }
     out = []
     seen = set()
@@ -31,7 +31,13 @@ def candidates_for_workflow(workflow: Workflow, risk_edges: list[dict], max_len:
         for deficit, val in edge["deficits"].items():
             if val <= 0:
                 continue
-            for t in mapping.get(deficit, []):
+            semantic = artifacts.get(edge["artifact_id"]).condition.semantic_type if artifacts and edge["artifact_id"] in artifacts else None
+            tools = list(mapping.get(deficit, []))
+            if deficit == "freshness":
+                tools = [t for t in tools if (semantic == "Position" and t in {"T11"}) or (semantic == "ThreatInfo" and t in {"T12", "T27", "T28"})]
+            if deficit in {"confidence", "provenance"}:
+                tools = [t for t in tools if t not in {"T03"} or semantic == "ObjectPosition"]
+            for t in tools:
                 key = (t, edge["artifact_id"])
                 if key not in seen:
                     seen.add(key)
@@ -60,6 +66,8 @@ def apply_repair(workflow: Workflow, candidate: RepairCandidate, registry: ToolR
         inp_name = "data"
         if tid == "T11":
             inp_name = "position"
+        elif tid == "T03":
+            inp_name = "object_position"
         elif tid in {"T12", "T27", "T28"}:
             inp_name = "threat"
         elif tid == "T13":

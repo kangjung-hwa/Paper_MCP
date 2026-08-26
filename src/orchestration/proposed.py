@@ -6,18 +6,53 @@ from src.models.workflow import Workflow
 from src.orchestration.repair_candidates import candidates_for_workflow
 from src.orchestration.repair_optimizer import optimize_repair
 from src.orchestration.risk import workflow_risk
+from src.orchestration.validator import validate_workflow
 
 
-def run_proposed(workflow: Workflow, task: TaskInstance, registry: ToolRegistry, theta: float, lam: float, *, no_downstream=False, no_cost=False, binary_deficit=False, strict=False, full_metadata=True):
-    risk, edges = workflow_risk(workflow, task, registry, binary=binary_deficit, no_downstream=no_downstream, full_metadata=full_metadata)
+def run_proposed(
+    workflow: Workflow,
+    task: TaskInstance,
+    registry: ToolRegistry,
+    theta: float,
+    lam: float,
+    *,
+    no_cost=False,
+    binary_deficit=False,
+    strict=False,
+    full_metadata=True,
+    risk_mode="max",
+    structural_dependency=False,
+    epsilon=0.0,
+):
+    risk, edges = workflow_risk(
+        workflow,
+        task,
+        registry,
+        binary=binary_deficit,
+        full_metadata=full_metadata,
+        risk_mode=risk_mode,
+        structural_dependency=structural_dependency,
+    )
     decision = strict or risk > theta
-    candidates = candidates_for_workflow(workflow, edges) if decision else []
+    _, artifacts = validate_workflow(workflow, task, registry, full_metadata=full_metadata, binary=binary_deficit)
+    candidates = candidates_for_workflow(workflow, edges, artifacts) if decision else []
     selected = None
     candidate_rows = []
     final = workflow
     residual = risk
     if candidates:
-        selected, candidate_rows = optimize_repair(workflow, task, registry, candidates, lam, no_cost=no_cost, full_metadata=full_metadata)
+        selected, candidate_rows = optimize_repair(
+            workflow,
+            task,
+            registry,
+            candidates,
+            lam,
+            no_cost=no_cost,
+            full_metadata=full_metadata,
+            risk_mode=risk_mode,
+            structural_dependency=structural_dependency,
+            epsilon=epsilon,
+        )
         if selected:
             final = selected["workflow"]
             residual = selected["residual_risk"]
@@ -27,6 +62,8 @@ def run_proposed(workflow: Workflow, task: TaskInstance, registry: ToolRegistry,
         "repair_decision": decision,
         "repair_candidates": candidate_rows,
         "selected_repair": selected["candidate"] if selected else None,
+        "selected_cost": selected["cost"] if selected else None,
+        "selected_risk_reduction": selected["risk_reduction"] if selected else 0.0,
         "final_workflow": final,
         "residual_risk": residual,
     }

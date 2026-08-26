@@ -13,10 +13,11 @@ from src.tasks.generator import save_tasks
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--seed", type=int, default=42)
-    p.add_argument("--out", default="data/tasks/tasks_seed42.jsonl")
+    p.add_argument("--out", default=None)
     args = p.parse_args()
-    tasks = save_tasks(Path(args.out), args.seed)
-    print(f"wrote {len(tasks)} tasks to {args.out}")
+    out = args.out or f"data/v3/tasks_seed{args.seed}.jsonl"
+    tasks = save_tasks(Path(out), args.seed)
+    print(f"wrote {len(tasks)} tasks to {out}")
 
 
 if __name__ == "__main__":

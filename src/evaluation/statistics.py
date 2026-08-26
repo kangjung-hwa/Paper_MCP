@@ -6,14 +6,18 @@ import random
 from src.evaluation.metrics import ci95, mean, std
 
 
+def _key(r):
+    return (r.get("task_id"), r.get("seed"))
+
+
 def descriptive(rows, field):
     xs = [float(r[field]) for r in rows]
     return {"mean": mean(xs), "std": std(xs), "ci95": ci95(xs), "n": len(xs)}
 
 
 def mcnemar_counts(rows_a, rows_b, outcome="GT_success"):
-    a = {r["task_id"]: int(r[outcome]) for r in rows_a}
-    b = {r["task_id"]: int(r[outcome]) for r in rows_b}
+    a = {_key(r): int(r[outcome]) for r in rows_a}
+    b = {_key(r): int(r[outcome]) for r in rows_b}
     both = sorted(set(a) & set(b))
     b01 = sum(1 for k in both if a[k] == 0 and b[k] == 1)
     b10 = sum(1 for k in both if a[k] == 1 and b[k] == 0)
@@ -37,7 +41,7 @@ def bootstrap_ci(values, seed=42, samples=1000, alpha=0.05):
 
 
 def paired_mean_effect(rows_a, rows_b, field):
-    a = {r["task_id"]: float(r[field]) for r in rows_a}
-    b = {r["task_id"]: float(r[field]) for r in rows_b}
+    a = {_key(r): float(r[field]) for r in rows_a}
+    b = {_key(r): float(r[field]) for r in rows_b}
     diffs = [b[k] - a[k] for k in sorted(set(a) & set(b))]
     return {"mean_difference": mean(diffs), "std_difference": std(diffs), "n": len(diffs)}

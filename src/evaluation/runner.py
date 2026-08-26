@@ -14,7 +14,9 @@ from src.oracle.success import gt_success
 from src.orchestration.dependency import branching_factor, downstream_depth
 from src.orchestration.proposed import run_proposed
 from src.orchestration.repair_candidates import candidates_for_workflow
+from src.orchestration.repair_optimizer import optimize_repair
 from src.orchestration.risk import workflow_risk
+from src.orchestration.validator import validate_workflow
 from src.tasks.generator import generate_tasks
 from src.tasks.gold_workflows import initial_workflow
 from src.utils.serialization import read_jsonl, write_jsonl
@@ -61,7 +63,20 @@ def run_one(task: TaskInstance, method: str, registry: ToolRegistry, theta: floa
     tool_observations = []
     llm_calls = 1 if planner_mode == "llm" else 0
     base_risk, base_edges = workflow_risk(initial, task, registry)
-    base_candidates = candidates_for_workflow(initial, base_edges)
+    _, base_artifacts = validate_workflow(initial, task, registry)
+    base_candidates = candidates_for_workflow(initial, base_edges, base_artifacts)
+    risk_only_selected = None
+    cost_selected = None
+    if len(base_candidates) >= 2:
+        risk_only, _ = optimize_repair(initial, task, registry, base_candidates, lam, no_cost=True)
+        cost_aware, _ = optimize_repair(initial, task, registry, base_candidates, lam, no_cost=False)
+        risk_only_selected = risk_only["candidate"] if risk_only else None
+        cost_selected = cost_aware["candidate"] if cost_aware else None
+
+    repair_method = method not in {"react", "react_llm", "schema_aware", "schema_aware_llm"}
+    if not repair_method:
+        risk_only_selected = None
+        cost_selected = None
 
     if method in {"react", "react_llm"}:
         final, planner_trace, tool_observations = _normalize_plan(react.plan(task, registry, max_tool_calls=max_tool_calls, planner_mode=planner_mode))
@@ -104,6 +119,10 @@ def run_one(task: TaskInstance, method: str, registry: ToolRegistry, theta: floa
         "repair_decision": bool(prop["repair_decision"]),
         "repair_candidates": prop.get("repair_candidates", []),
         "selected_repair": prop.get("selected_repair"),
+        "risk_only_selected_repair": risk_only_selected,
+        "cost_aware_selected_repair": cost_selected,
+        "selection_changed_by_cost": bool(repair_method and risk_only_selected and cost_selected and risk_only_selected != cost_selected),
+        "multi_candidate_task": bool(repair_method and len(base_candidates) >= 2),
         "repair_required": bool(required),
         "repair_correct": bool(prop["repair_decision"]) == bool(required),
         "tool_calls": state.tool_calls,
@@ -112,6 +131,10 @@ def run_one(task: TaskInstance, method: str, registry: ToolRegistry, theta: floa
         "simulated_latency_ms": state.simulated_latency_ms,
         "wall_clock_latency_ms": state.wall_clock_latency_ms(),
         "workflow_modification_ratio": len(inserted) / max(1, len(initial.nodes)),
+        "average_added_calls": len(inserted),
+        "average_added_latency": sum(registry.get(n.tool_id).base_latency_ms for n in inserted),
+        "risk_reduction": prop.get("selected_risk_reduction", max(0.0, prop["initial_risk"] - prop["residual_risk"])),
+        "risk_reduction_per_added_latency": (prop.get("selected_risk_reduction", 0.0) / max(1.0, sum(registry.get(n.tool_id).base_latency_ms for n in inserted))),
         "outcome_unnecessary_repairs": counts["OURR_count"],
         "validity_unnecessary_repairs": counts["VURR_count"],
         "unnecessary_repairs": counts["VURR_count"],

@@ -43,7 +43,7 @@ def main():
     for method in ["react_llm", "schema_aware_llm", "proposed_llm"]:
         for t in tasks:
             out.append(run_one(t, method, registry, float(cfg["theta"]), float(cfg["lambda"]), cfg["model_name"], float(cfg["temperature"]), planner_mode="llm", max_tool_calls=int(cfg.get("max_tool_calls", 20))))
-    write_jsonl(Path("results/v2/raw/llm_validation.jsonl"), out)
+    write_jsonl(Path("results/v3/raw/llm_validation.jsonl"), out)
     print(f"wrote {len(out)} LLM validation rows")
 
 

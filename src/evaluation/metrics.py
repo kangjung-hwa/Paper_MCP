@@ -50,6 +50,13 @@ def pr_auc(labels, scores):
     return area
 
 
+def repair_selection_change_rate(rows):
+    eligible = [r for r in rows if r.get("multi_candidate_task")]
+    if not eligible:
+        return 0.0
+    return sum(1 for r in eligible if r.get("selection_changed_by_cost")) / len(eligible)
+
+
 def summarize(rows: list[dict], group_by: str | None = None) -> list[dict]:
     groups = defaultdict(list)
     for r in rows:
@@ -74,6 +81,7 @@ def summarize(rows: list[dict], group_by: str | None = None) -> list[dict]:
             "TSR": mean([r["GT_success"] for r in rs]),
             "EPVR": mean([r["GT_valid"] for r in rs]),
             "repair_precision": prec,
+            "repair_rate": mean([1.0 if r["repair_decision"] else 0.0 for r in rs]),
             "repair_recall": rec,
             "repair_f1": f1,
             "OURR": ourr / inserted if inserted else 0.0,
@@ -84,7 +92,12 @@ def summarize(rows: list[dict], group_by: str | None = None) -> list[dict]:
             "avg_tool_calls": mean([r["tool_calls"] for r in rs]),
             "avg_agent_calls": mean([r["agent_calls"] for r in rs]),
             "avg_latency": mean([r["simulated_latency_ms"] for r in rs]),
+            "avg_added_calls": mean([r.get("average_added_calls", 0) for r in rs]),
+            "avg_added_latency": mean([r.get("average_added_latency", 0.0) for r in rs]),
             "avg_residual_risk": mean([r["residual_risk"] for r in rs]),
+            "risk_reduction": mean([r.get("risk_reduction", 0.0) for r in rs]),
+            "risk_reduction_per_added_latency": mean([r.get("risk_reduction_per_added_latency", 0.0) for r in rs]),
+            "repair_selection_change_rate": repair_selection_change_rate(rs),
         }
         out.append(row)
     return out

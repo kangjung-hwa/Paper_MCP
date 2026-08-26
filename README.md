@@ -210,3 +210,15 @@ The LLM prompt path must use public tool metadata only. Oracle world state, GT l
 ### Current V2 Sanity Notes
 
 The current v2 run emits a repair-metric warning because VURR is 0 across methods, while OURR is non-zero. This is not hidden or tuned away; it indicates that validity-unnecessary repair remains rare under the current Oracle precondition rules, but outcome-unnecessary repair is measurable.
+
+
+## V3 Validity-Focused Experiment
+
+V3 narrows the paper claims to execution-condition validation, risk-based selective repair, and measurable cost-aware repair choice. V2 results remain preserved in `results/v2/`; V3 writes to `results/v3/` and datasets to `data/v3/`.
+
+```bash
+python scripts/run_all.py
+python scripts/run_llm_validation.py  # optional; falls back when no API key is configured
+```
+
+See `V3_REPORT.md` for the final v3 research questions, tables, sanity checks, and supported/unsupported contributions.

@@ -4,7 +4,7 @@ lambda: 0.25
 eta: 0.1
 xi: 0.1
 metadata_mode: full
-task_path: data/tasks/tasks_seed42.jsonl
+task_path: data/v3/tasks_seed42.jsonl
 model_name: deterministic-planner
 temperature: 0.0
 max_tool_calls: 20
@@ -13,3 +13,7 @@ timeout_ms: 10000
 planner_mode: deterministic
 llm_provider: openai_compatible
 llm_sample_size: 60
+risk_mode: max
+structural_dependency: false
+epsilon: 0.0
+seeds: [42, 123, 2026]

@@ -1,0 +1,7 @@
+b01,b10,chi2_cc,comparison,mean_difference,metric,n,paired_effect,proposed_bootstrap_ci_high,proposed_bootstrap_ci_low,std_difference
+0,0,0.0,strict_vs_proposed,,GT_success,900,0.0,,,
+0,54,52.01851851851852,strict_vs_proposed,,GT_valid,900,-0.06,,,
+,,,strict_vs_proposed,-11.447992145391561,simulated_latency_ms,900,,1577.1514563800934,1508.9563479203036,48.45771671971161
+,,,strict_vs_proposed,-0.06,tool_calls,900,,7.46,7.274444444444445,0.23761888892457309
+,,,strict_vs_proposed,-0.06,outcome_unnecessary_repairs,900,,0.2633333333333333,0.2088888888888889,0.23761888892457309
+,,,strict_vs_proposed,0.0,TSR_difference_prop_minus_strict,900,,,,

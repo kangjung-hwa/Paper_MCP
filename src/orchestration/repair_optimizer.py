@@ -7,26 +7,48 @@ from src.orchestration.repair_candidates import RepairCandidate, apply_repair
 from src.orchestration.risk import workflow_risk
 
 
-def repair_cost(candidate: RepairCandidate, original_nodes: int, registry: ToolRegistry, betas: dict | None = None) -> dict:
-    betas = betas or {"latency": 0.25, "tool_calls": 0.25, "agent_calls": 0.25, "workflow_modification": 0.25}
-    latency = min(1.0, sum(registry.get(t).base_latency_ms for t in candidate.tools) / 1500.0)
-    tool_calls = min(1.0, len(candidate.tools) / 3.0)
-    agent_calls = min(1.0, sum(1 for t in candidate.tools if registry.get(t).is_agent) / 3.0)
-    modification = min(1.0, len(candidate.tools) / max(1, original_nodes))
-    total = betas["latency"] * latency + betas["tool_calls"] * tool_calls + betas["agent_calls"] * agent_calls + betas["workflow_modification"] * modification
-    return {"latency": latency, "tool_calls": tool_calls, "agent_calls": agent_calls, "workflow_modification": modification, "total": total}
+def repair_cost(candidate: RepairCandidate, registry: ToolRegistry, beta_latency: float = 0.5, beta_calls: float = 0.5) -> dict:
+    added_latency_ms = sum(registry.get(t).base_latency_ms for t in candidate.tools)
+    added_calls = len(candidate.tools)
+    normalized_latency = min(1.0, added_latency_ms / 1000.0)
+    normalized_calls = min(1.0, added_calls / 3.0)
+    total = beta_latency * normalized_latency + beta_calls * normalized_calls
+    return {
+        "added_latency_ms": added_latency_ms,
+        "added_calls": added_calls,
+        "normalized_latency": normalized_latency,
+        "normalized_calls": normalized_calls,
+        "total": total,
+    }
 
 
-def optimize_repair(workflow: Workflow, task: TaskInstance, registry: ToolRegistry, candidates: list[RepairCandidate], lam: float, no_cost: bool = False, full_metadata: bool = True):
+def optimize_repair(
+    workflow: Workflow,
+    task: TaskInstance,
+    registry: ToolRegistry,
+    candidates: list[RepairCandidate],
+    lam: float,
+    no_cost: bool = False,
+    full_metadata: bool = True,
+    risk_mode: str = "max",
+    structural_dependency: bool = False,
+    epsilon: float = 0.0,
+):
+    before, _ = workflow_risk(workflow, task, registry, full_metadata=full_metadata, risk_mode=risk_mode, structural_dependency=structural_dependency)
     best = None
     rows = []
     for c in candidates:
         repaired = apply_repair(workflow, c, registry)
-        residual, _ = workflow_risk(repaired, task, registry, full_metadata=full_metadata)
-        cost = repair_cost(c, len(workflow.nodes), registry)
+        residual, _ = workflow_risk(repaired, task, registry, full_metadata=full_metadata, risk_mode=risk_mode, structural_dependency=structural_dependency)
+        reduction = before - residual
+        cost = repair_cost(c, registry)
+        if reduction < epsilon:
+            row = {"candidate": c.to_dict(), "residual_risk": residual, "risk_reduction": reduction, "cost": cost, "J": None, "filtered": True}
+            rows.append(row)
+            continue
         j = residual if no_cost else residual + lam * cost["total"]
-        row = {"candidate": c.to_dict(), "residual_risk": residual, "cost": cost, "J": j}
+        row = {"candidate": c.to_dict(), "residual_risk": residual, "risk_reduction": reduction, "cost": cost, "J": j, "filtered": False}
         rows.append(row)
         if best is None or j < best["J"]:
-            best = row | {"workflow": repaired, "candidate_obj": c}
+            best = row | {"candidate_obj": c, "workflow": repaired}
     return best, rows
