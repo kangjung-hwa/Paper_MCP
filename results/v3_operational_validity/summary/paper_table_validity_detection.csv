@@ -1,0 +1,5 @@
+Method,Invalid Plan Precision,Invalid Plan Recall,Invalid Plan F1,Invalid Plan ROC-AUC,Invalid Plan PR-AUC
+Proposed,1.0,1.0,1.0,1.0,1.0
+ReAct,1.0,0.665929203539823,0.799468791500664,0.8986745417193426,0.9810342390813047
+Schema-Aware,1.0,1.0,1.0,1.0,1.0
+Strict,1.0,1.0,1.0,1.0,1.0

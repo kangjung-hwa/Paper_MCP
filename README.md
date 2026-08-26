@@ -222,3 +222,14 @@ python scripts/run_llm_validation.py  # optional; falls back when no API key is 
 ```
 
 See `V3_REPORT.md` for the final v3 research questions, tables, sanity checks, and supported/unsupported contributions.
+
+
+## V3 Operational Validity Add-on
+
+The v3 algorithm and `results/v3/` outputs are left unchanged. The operational validity add-on re-evaluates existing v3 raw outputs and writes separate artifacts to `results/v3_operational_validity/`.
+
+```bash
+python scripts/run_operational_validity.py
+```
+
+This adds SCCR, OEPVR, invalid operational plan detection metrics, transition counts, paper-table CSVs, and PNG/PDF figures. See `V3_OPERATIONAL_VALIDITY_REPORT.md`.
