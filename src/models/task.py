@@ -15,6 +15,7 @@ class TaskInstance:
     oracle_conditions: dict[str, Any]
     seed: int
     split: str = "test"
+    oracle_world: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

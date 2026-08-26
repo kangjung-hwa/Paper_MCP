@@ -19,11 +19,11 @@ class RepairCandidate:
 
 def candidates_for_workflow(workflow: Workflow, risk_edges: list[dict], max_len: int = 3) -> list[RepairCandidate]:
     mapping = {
-        "reference_frame": ["T09"],
+        "reference_frame": ["T09", "T25", "T26"],
         "unit": ["T10"],
-        "freshness": ["T11", "T12"],
-        "confidence": ["T14", "T13"],
-        "provenance": ["T15"],
+        "freshness": ["T11", "T12", "T27", "T28"],
+        "confidence": ["T14", "T13", "T26", "T28"],
+        "provenance": ["T15", "T26", "T28"],
     }
     out = []
     seen = set()
@@ -60,7 +60,7 @@ def apply_repair(workflow: Workflow, candidate: RepairCandidate, registry: ToolR
         inp_name = "data"
         if tid == "T11":
             inp_name = "position"
-        elif tid == "T12":
+        elif tid in {"T12", "T27", "T28"}:
             inp_name = "threat"
         elif tid == "T13":
             inp_name = "primary"

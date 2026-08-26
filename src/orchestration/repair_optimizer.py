@@ -17,12 +17,12 @@ def repair_cost(candidate: RepairCandidate, original_nodes: int, registry: ToolR
     return {"latency": latency, "tool_calls": tool_calls, "agent_calls": agent_calls, "workflow_modification": modification, "total": total}
 
 
-def optimize_repair(workflow: Workflow, task: TaskInstance, registry: ToolRegistry, candidates: list[RepairCandidate], lam: float, no_cost: bool = False):
+def optimize_repair(workflow: Workflow, task: TaskInstance, registry: ToolRegistry, candidates: list[RepairCandidate], lam: float, no_cost: bool = False, full_metadata: bool = True):
     best = None
     rows = []
     for c in candidates:
         repaired = apply_repair(workflow, c, registry)
-        residual, _ = workflow_risk(repaired, task, registry)
+        residual, _ = workflow_risk(repaired, task, registry, full_metadata=full_metadata)
         cost = repair_cost(c, len(workflow.nodes), registry)
         j = residual if no_cost else residual + lam * cost["total"]
         row = {"candidate": c.to_dict(), "residual_risk": residual, "cost": cost, "J": j}

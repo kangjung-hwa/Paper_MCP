@@ -26,6 +26,34 @@ QUERIES = {
 }
 
 
+def _oracle_world(family: str, violation_type: str, severity: str, rng: random.Random) -> dict:
+    impacted = severity == "critical"
+    world = {
+        "own_position_true": [0.0, 0.0],
+        "destination_true": [100.0, 100.0],
+        "threat_polygons_true": [],
+        "weather_hazards_true": [],
+        "communication_regions_true": [[0.0, 0.0, 100.0, 100.0]],
+        "terrain_obstacles_true": [],
+        "current_time": 0.0,
+        "outcome_impacted": impacted,
+        "failure_mode": violation_type,
+        "valid_but_route_blocked": False,
+    }
+    if impacted:
+        if family in {"F2", "F5", "F6"}:
+            world["threat_polygons_true"] = [[45.0, 45.0, 55.0, 55.0]]
+        elif family == "F3":
+            world["weather_hazards_true"] = [[45.0, 45.0, 55.0, 55.0]]
+        elif family == "F4":
+            world["communication_regions_true"] = [[0.0, 0.0, 40.0, 40.0]]
+        else:
+            world["terrain_obstacles_true"] = [[45.0, 45.0, 55.0, 55.0]]
+        if rng.random() < 0.1:
+            world["valid_but_route_blocked"] = True
+    return world
+
+
 def generate_tasks(seed: int = 42) -> list[TaskInstance]:
     rng = random.Random(seed)
     tasks = []
@@ -43,9 +71,10 @@ def generate_tasks(seed: int = 42) -> list[TaskInstance]:
                 initial_state=initial_attributes(vt, sev),
                 violation_type=vt,
                 severity=sev,
-                oracle_conditions={"minor_success_tolerated": sev == "minor"},
+                oracle_conditions={"minor_success_tolerated": sev == "minor", "outcome_impacted": sev == "critical"},
                 seed=task_seed,
                 split=split,
+                oracle_world=_oracle_world(f, vt, sev, rng),
             ))
     return tasks
 

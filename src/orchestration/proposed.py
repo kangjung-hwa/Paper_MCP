@@ -8,8 +8,8 @@ from src.orchestration.repair_optimizer import optimize_repair
 from src.orchestration.risk import workflow_risk
 
 
-def run_proposed(workflow: Workflow, task: TaskInstance, registry: ToolRegistry, theta: float, lam: float, *, no_downstream=False, no_cost=False, binary_deficit=False, strict=False):
-    risk, edges = workflow_risk(workflow, task, registry, binary=binary_deficit, no_downstream=no_downstream)
+def run_proposed(workflow: Workflow, task: TaskInstance, registry: ToolRegistry, theta: float, lam: float, *, no_downstream=False, no_cost=False, binary_deficit=False, strict=False, full_metadata=True):
+    risk, edges = workflow_risk(workflow, task, registry, binary=binary_deficit, no_downstream=no_downstream, full_metadata=full_metadata)
     decision = strict or risk > theta
     candidates = candidates_for_workflow(workflow, edges) if decision else []
     selected = None
@@ -17,7 +17,7 @@ def run_proposed(workflow: Workflow, task: TaskInstance, registry: ToolRegistry,
     final = workflow
     residual = risk
     if candidates:
-        selected, candidate_rows = optimize_repair(workflow, task, registry, candidates, lam, no_cost=no_cost)
+        selected, candidate_rows = optimize_repair(workflow, task, registry, candidates, lam, no_cost=no_cost, full_metadata=full_metadata)
         if selected:
             final = selected["workflow"]
             residual = selected["residual_risk"]

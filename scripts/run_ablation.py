@@ -23,21 +23,21 @@ def main():
     registry = ToolRegistry()
     out = []
     settings = {
-        "A1_no_downstream": {"method": "proposed", "flags": {"no_downstream": True}},
-        "A2_no_cost": {"method": "proposed", "flags": {"no_cost": True}},
-        "A3_strict_repair": {"method": "proposed", "flags": {"strict": True}},
-        "A4_no_deficit_magnitude": {"method": "proposed", "flags": {"binary_deficit": True}},
-        "A5_full_proposed": {"method": "proposed", "flags": {}},
+        "A1_no_downstream": {"flags": {"no_downstream": True}},
+        "A2_no_cost": {"flags": {"no_cost": True}},
+        "A3_strict_repair": {"flags": {"strict": True}},
+        "A4_no_deficit_magnitude": {"flags": {"binary_deficit": True}},
+        "A5_full_proposed": {"flags": {}},
     }
-    for label, s in settings.items():
+    for label, spec in settings.items():
         for t in tasks:
-            row = run_one(t, s["method"], registry, float(cfg["theta"]), float(cfg["lambda"]), cfg["model_name"], float(cfg["temperature"]), s["flags"])
+            row = run_one(t, "proposed", registry, float(cfg["theta"]), float(cfg["lambda"]), cfg["model_name"], float(cfg["temperature"]), spec["flags"], planner_mode=cfg.get("planner_mode", "deterministic"), max_tool_calls=int(cfg.get("max_tool_calls", 20)))
             row["method"] = label
             out.append(row)
-    write_jsonl(Path("results/raw/ablation_all.jsonl"), out)
+    write_jsonl(Path("results/v2/raw/ablation_all.jsonl"), out)
     from src.evaluation.metrics import summarize
 
-    write_csv(Path("results/summary/ablation.csv"), summarize(out))
+    write_csv(Path("results/v2/summary/ablation.csv"), summarize(out))
     print(f"wrote {len(out)} ablation rows")
 
 

@@ -7,8 +7,8 @@ from src.orchestration.dependency import dependency_impact
 from src.orchestration.validator import validate_workflow
 
 
-def workflow_risk(workflow: Workflow, task: TaskInstance, registry: ToolRegistry, binary: bool = False, no_downstream: bool = False) -> tuple[float, list[dict]]:
-    validations, _ = validate_workflow(workflow, task, registry, full_metadata=True, binary=binary)
+def workflow_risk(workflow: Workflow, task: TaskInstance, registry: ToolRegistry, binary: bool = False, no_downstream: bool = False, full_metadata: bool = True) -> tuple[float, list[dict]]:
+    validations, _ = validate_workflow(workflow, task, registry, full_metadata=full_metadata, binary=binary)
     rows = []
     max_r = 0.0
     for v in validations:

@@ -6,14 +6,37 @@ from src.oracle.validity import gt_valid
 from src.orchestration.repair_candidates import RepairCandidate, apply_repair
 
 
-def unnecessary_repairs(workflow: Workflow, task: TaskInstance, registry: ToolRegistry) -> int:
-    count = 0
+def _remove_repair_node(workflow: Workflow, node_id: str) -> Workflow:
+    reduced = workflow.clone()
+    node = next((n for n in reduced.nodes if n.node_id == node_id), None)
+    if node is None:
+        return reduced
+    in_artifact = next(iter(node.inputs.values()), None)
+    out_artifact = next(iter(node.outputs.values()), None)
+    reduced.nodes = [n for n in reduced.nodes if n.node_id != node_id]
+    if in_artifact and out_artifact:
+        for n in reduced.nodes:
+            for key, value in list(n.inputs.items()):
+                if value == out_artifact:
+                    n.inputs[key] = in_artifact
+    return reduced
+
+
+def unnecessary_repair_counts(workflow: Workflow, task: TaskInstance, registry: ToolRegistry) -> dict[str, int]:
+    ourr = 0
+    vurr = 0
+    with_success = gt_success(workflow, task, registry)
     for node in [n for n in workflow.nodes if n.inserted]:
-        reduced = workflow.clone()
-        reduced.nodes = [n for n in reduced.nodes if n.node_id != node.node_id]
-        if gt_valid(reduced, task, registry) and gt_success(reduced, task, registry):
-            count += 1
-    return count
+        reduced = _remove_repair_node(workflow, node.node_id)
+        if with_success and gt_success(reduced, task, registry):
+            ourr += 1
+        if gt_valid(reduced, task, registry):
+            vurr += 1
+    return {"OURR_count": ourr, "VURR_count": vurr}
+
+
+def unnecessary_repairs(workflow: Workflow, task: TaskInstance, registry: ToolRegistry) -> int:
+    return unnecessary_repair_counts(workflow, task, registry)["VURR_count"]
 
 
 def _candidate_workflow(original: Workflow, candidate_row, registry: ToolRegistry):

@@ -137,3 +137,76 @@ Oracle code in `src/oracle/` independently evaluates mandatory execution conditi
 ## Known Limits
 
 The current planner is deterministic for reproducible paper experiments. Tool outputs are simulated rather than connected to live services. Geometry checks are represented by deterministic condition rules; real polygon intersection can be added behind the same Oracle interface.
+
+
+## V2 Validity Improvements
+
+V2 preserves the original project layout and 24 base tools, while adding four alternative repair tools (T25-T28) so repair optimization has real cost/quality alternatives. Existing v1 outputs were preserved under `results/archive/v1_initial/`; new outputs are written to `results/v2/`.
+
+### ReAct Baseline
+
+`src/baselines/react.py` now implements a deterministic ReAct-style loop:
+
+1. infer required tool sequence from the user query,
+2. choose an executable action using public tool descriptions and public schema,
+3. append the tool result as an observation,
+4. continue until a goal artifact is produced or `max_tool_calls` is reached.
+
+It does not import or call `gold_workflows.py`. Every thought/action/observation is stored in raw result field `planner_trace` and `tool_observations`.
+
+### Schema-Aware Baseline
+
+`src/baselines/schema_aware.py` is a HyperAgent-inspired schema-aware baseline; not an exact reproduction of the original HyperAgent implementation. It performs backward graph search from the goal semantic artifact and recursively resolves missing requirements using only public input/output schema and semantic type. It ignores coordinate frame, unit, freshness, confidence, provenance, downstream impact, and risk. Tie-breaks are minimum tool count proxy, lower simulated latency, then lexical tool id.
+
+### Oracle Separation
+
+Oracle evaluation no longer imports `src.orchestration.validator`. The independent path is:
+
+| Module | Role |
+|---|---|
+| `src/oracle/environment.py` | hidden world state and geometric/environment helpers |
+| `src/oracle/artifact_semantics.py` | Oracle-only condition comparison |
+| `src/oracle/simulator.py` | Oracle execution simulation using registry oracle requirements |
+| `src/oracle/task_outcomes.py` | task-family outcome rules |
+| `src/oracle/validity.py` | GT_valid |
+| `src/oracle/success.py` | GT_success and failure reason |
+
+This allows `GT_valid=False, GT_success=True` for minor outcome-safe violations, and `GT_valid=True, GT_success=False` for valid plans that still fail in the hidden environment.
+
+### Outcome-Based Minor/Critical Tasks
+
+Task instances now include `oracle_world`, hidden from planners. Minor tasks may violate execution preconditions but set `outcome_impacted=False`, so the final route can still succeed. Critical tasks set hidden obstacles, threat polygons, weather hazards, or communication coverage failures so uncorrected workflows fail by outcome, not merely by deficit magnitude.
+
+### Repair Metrics
+
+| Metric | Definition |
+|---|---|
+| OURR | Outcome-unnecessary repair rate: removing an inserted repair still leaves `GT_success=True` |
+| VURR | Validity-unnecessary repair rate: removing an inserted repair still leaves `GT_valid=True` |
+
+`OURR` is the main paper metric. The previous strict URR column is retained as an alias for VURR for backward compatibility.
+
+### V2 Outputs
+
+| File | Content |
+|---|---|
+| `results/v2/raw/*.jsonl` | task-level raw logs with planner trace, observations, risk edges, failure reason |
+| `results/v2/summary/main_results.csv` | method comparison with OURR/VURR/AUC columns |
+| `results/v2/summary/ablation.csv` | A1-A5 ablation |
+| `results/v2/summary/by_downstream_depth.csv` | depth bucket comparison for Proposed and no-downstream |
+| `results/v2/summary/by_branching_factor.csv` | branch bucket comparison |
+| `results/v2/summary/sanity_warnings.txt` | automatic validity warnings |
+
+### LLM Validation
+
+Controlled experiments remain deterministic by default. OpenAI-compatible validation hooks are available via `src/planner/llm_backend.py`; if no API key is configured, deterministic mode remains usable.
+
+```bash
+OPENAI_API_KEY=... python scripts/run_llm_validation.py
+```
+
+The LLM prompt path must use public tool metadata only. Oracle world state, GT labels, severity, hidden conditions, and failure reasons are not exposed.
+
+### Current V2 Sanity Notes
+
+The current v2 run emits a repair-metric warning because VURR is 0 across methods, while OURR is non-zero. This is not hidden or tuned away; it indicates that validity-unnecessary repair remains rare under the current Oracle precondition rules, but outcome-unnecessary repair is measurable.

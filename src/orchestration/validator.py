@@ -37,6 +37,8 @@ def _merge_task_observation(cond: ExecutionCondition, artifact_name: str, task: 
     attrs = task.initial_state.get(artifact_name)
     if not attrs:
         return cond
+    if artifact_name not in {"position", "destination", "threat", "weather", "terrain", "comm", "object_position"}:
+        return cond
     return ExecutionCondition(
         schema_type=cond.schema_type,
         semantic_type=cond.semantic_type,
@@ -65,7 +67,7 @@ def validate_workflow(workflow: Workflow, task: TaskInstance, registry: ToolRegi
             cond = spec.outputs[out_name]
             base = artifacts.get(next(iter(node.inputs.values()), ""), None)
             # Transform/repair tools preserve semantic type when their declared output omits it.
-            if node.tool_id in {"T09", "T10", "T13", "T14", "T15"} and base:
+            if node.tool_id in {"T09", "T10", "T13", "T14", "T15", "T25", "T26"} and base:
                 cond = ExecutionCondition(
                     schema_type=cond.schema_type or base.condition.schema_type,
                     semantic_type=cond.semantic_type or base.condition.semantic_type,
