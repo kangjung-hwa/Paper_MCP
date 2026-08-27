@@ -17,8 +17,10 @@ def test_external_baselines_do_not_import_oracle_or_proposed_risk():
         "src.oracle",
         "GT_success",
         "GT_operational_valid",
+        "GT_strict_valid",
         "src.orchestration.risk",
         "src.orchestration.proposed",
+        "repair_optimizer",
     ]
     for path in BASELINE_FILES:
         text = path.read_text()
@@ -52,3 +54,19 @@ def test_reflection_baselines_have_non_degenerate_corrections():
     assert any(c > 0 for c in toolmvr_counts)
     assert any(c == 0 for c in mirror_counts)
     assert any(c == 0 for c in toolmvr_counts)
+
+
+def test_reflection_baselines_do_not_share_correction_helpers():
+    mirror_text = Path("src/baselines/mirror_inspired.py").read_text()
+    toolmvr_text = Path("src/baselines/tool_mvr_inspired.py").read_text()
+    assert "tool_mvr_inspired" not in mirror_text
+    assert "mirror_inspired" not in toolmvr_text
+    assert "_apply_pre_execution_corrections" not in toolmvr_text
+
+
+def test_tool_mvr_has_no_pre_execution_correction():
+    registry = ToolRegistry()
+    for task in generate_tasks(42):
+        _, _, _, meta = tool_mvr_inspired.plan(task, registry)
+        assert meta["pre_execution_reflection_count"] == 0
+        assert meta["pre_execution_correction_count"] == 0

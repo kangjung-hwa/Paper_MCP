@@ -1,0 +1,25 @@
+b01,b10,chi2_cc,ci_high,ci_low,comparison,mean_difference,metric,n,paired_effect,std_difference
+261,46,149.1726384364821,,,Proposed minus Direct Tool-Planning,,GT_strict_valid,900,0.2388888888888889,
+253,26,183.06810035842295,,,Proposed minus Direct Tool-Planning,,GT_operational_valid,900,0.25222222222222224,
+193,0,191.00518134715026,,,Proposed minus Direct Tool-Planning,,GT_success,900,0.21444444444444444,
+,,,170.04344195465492,152.23970598962904,Proposed minus Direct Tool-Planning,161.19797671636172,simulated_latency_ms,900,,138.4593663034792
+,,,1.2444444444444445,1.1555555555555554,Proposed minus Direct Tool-Planning,1.198888888888889,tool_calls,900,,0.6911154666971334
+243,88,71.64954682779457,,,Proposed minus MIRROR-inspired,,GT_strict_valid,900,0.17222222222222222,
+228,78,72.55228758169935,,,Proposed minus MIRROR-inspired,,GT_operational_valid,900,0.16666666666666666,
+193,0,191.00518134715026,,,Proposed minus MIRROR-inspired,,GT_success,900,0.21444444444444444,
+,,,22.385471205311582,-24.25550792137217,Proposed minus MIRROR-inspired,-0.26725759053201725,simulated_latency_ms,900,,357.7913963586967
+,,,0.9166666666666666,0.8144444444444444,Proposed minus MIRROR-inspired,0.8655555555555555,tool_calls,900,,0.7712378434362446
+243,88,71.64954682779457,,,Proposed minus Tool-MVR-inspired,,GT_strict_valid,900,0.17222222222222222,
+228,78,72.55228758169935,,,Proposed minus Tool-MVR-inspired,,GT_operational_valid,900,0.16666666666666666,
+193,0,191.00518134715026,,,Proposed minus Tool-MVR-inspired,,GT_success,900,0.21444444444444444,
+,,,-227.81601401948632,-328.4427442009906,Proposed minus Tool-MVR-inspired,-277.08957977494657,simulated_latency_ms,900,,780.5706873533654
+,,,0.2922222222222222,0.10333333333333333,Proposed minus Tool-MVR-inspired,0.1988888888888889,tool_calls,900,,1.4710400129041183
+0,54,52.01851851851852,,,Proposed minus Strict,,GT_strict_valid,900,-0.06,
+0,0,0.0,,,Proposed minus Strict,,GT_operational_valid,900,0.0,
+0,0,0.0,,,Proposed minus Strict,,GT_success,900,0.0,
+0,0,0.0,,,Tool-MVR-inspired minus MIRROR-inspired,,GT_operational_valid,900,0.0,
+0,0,0.0,,,Tool-MVR-inspired minus MIRROR-inspired,,GT_success,900,0.0,
+,,,306.07818881176127,250.17446835174653,Tool-MVR-inspired minus MIRROR-inspired,276.8223221844146,simulated_latency_ms,900,,450.4825610797297
+,,,0.7288888888888889,0.6111111111111112,Tool-MVR-inspired minus MIRROR-inspired,0.6666666666666666,tool_calls,900,,0.9433332612731565
+,,,0.0,0.0,Tool-MVR-inspired minus MIRROR-inspired,0.0,correction_count,900,,0.0
+,,,0.36444444444444446,0.3055555555555556,Tool-MVR-inspired minus MIRROR-inspired,0.3333333333333333,post_execution_recovery_count,900,,0.47166663063657827

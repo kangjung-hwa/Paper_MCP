@@ -252,3 +252,13 @@ The main external comparison uses:
 | Proposed | Current v3 risk-aware selective repair, reused without algorithm changes |
 
 The external baselines are inspired by recent tool-planning and reflection work; they are not exact reproductions of BFCL, PlanningArena, MIRROR, or Tool-MVR. See V4_EXTERNAL_BASELINE_REPORT.md.
+
+## V4.1 External Baseline Timing Separation
+
+V4.1 preserves results/v3/, results/v3_operational_validity/, and results/v4_external_baselines/. New outputs are written to results/v4_1_external_baselines/.
+
+Run:
+
+    python scripts/run_external_baselines_v4_1.py
+
+This version separates MIRROR-inspired pre-execution reflection/correction from Tool-MVR-inspired post-execution error reflection/correction/retry, while keeping Proposed, Oracle, task set, seeds, theta, lambda, tool registry, and operational tolerance unchanged. See V4_1_EXTERNAL_BASELINE_REPORT.md.
