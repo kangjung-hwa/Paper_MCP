@@ -233,3 +233,22 @@ python scripts/run_operational_validity.py
 ```
 
 This adds SCCR, OEPVR, invalid operational plan detection metrics, transition counts, paper-table CSVs, and PNG/PDF figures. See `V3_OPERATIONAL_VALIDITY_REPORT.md`.
+
+## V4 External Baseline Comparison
+
+V4 preserves results/v3/ and results/v3_operational_validity/ and writes new external-comparison artifacts to results/v4_external_baselines/.
+
+Run:
+
+    python scripts/run_external_baselines.py
+
+The main external comparison uses:
+
+| Method | Role |
+|---|---|
+| Direct Tool-Planning | Query-driven tool selection and sequencing using public tool metadata only |
+| MIRROR-inspired | Deterministic intra/inter-reflection over public schema observations |
+| Tool-MVR-inspired | Deterministic post-execution error/reflection/correction loop |
+| Proposed | Current v3 risk-aware selective repair, reused without algorithm changes |
+
+The external baselines are inspired by recent tool-planning and reflection work; they are not exact reproductions of BFCL, PlanningArena, MIRROR, or Tool-MVR. See V4_EXTERNAL_BASELINE_REPORT.md.
