@@ -30,7 +30,7 @@ Although Model Context Protocol (MCP) enables AI agents to integrate heterogeneo
 
 기존 tool planning 연구는 도구 선택, 호출 순서, 함수 인자 생성 및 schema-level compatibility를 주요 평가 대상으로 설정한다[1], [2]. Reflection 기반 연구는 계획 또는 실행 과정에서 발생한 오류를 추론 단계에서 검토하고 수정한다. MIRROR는 실행 전후의 reflection을 결합하여 tool-use trajectory를 개선하고[4], Tool-MVR은 meta-verification과 Error–Reflection–Correction 구조를 이용하여 도구 사용 오류의 수정 능력을 학습한다[5]. 그러나 구조적으로 연결된 artifact의 운용 조건을 정형화하고, 조건 위반의 크기를 수치화하여 실행 전 보완 여부를 결정하는 방법은 기존 연구의 주요 범위에 포함되지 않는다. 특히 모든 조건 위반을 동일하게 처리하면 운용상 허용 가능한 작은 편차에도 보완 도구가 삽입되어 추가 호출과 지연시간이 증가한다. 실행 유효성을 유지하면서 불필요한 보완을 제한하려면 조건 위반의 크기와 보완 비용을 동시에 고려하는 의사결정 기준이 필요하다.
 
-국내에서도 LLM을 순차적 작업계획과 의사결정 과정에 활용하는 연구가 진행되고 있다. 조준형과 정소이는 강화학습 기반 순차 작업계획에서 LLM이 생성한 단계별 행동 마스크를 적용하여 탐색 공간을 제한하고 계획 효율을 향상시키는 방법을 제안하였다[6]. 해당 연구는 LLM의 추론 결과를 작업계획 과정에 반영하지만 복수 도구 간 artifact의 실행조건 유효성과 보완 여부를 평가하지 않는다.
+국내에서도 LLM 기반 작업계획, AI 기능의 단계적 연계 및 멀티에이전트 협업에 관한 연구가 수행되고 있다. 조준형과 정소이는 강화학습 기반 순차 작업계획에 LLM이 생성한 단계별 행동 마스크를 적용하여 탐색 공간을 제한하고 계획 효율을 향상시키는 방법을 제안하였다[6]. 우성영 등은 RAG 프롬프트 기반 레이아웃 생성과 DQN 기반 검증·수정·최적화를 결합하여 생성-검증-최적화 과정을 자동화한 통합 프레임워크를 제안하였다[7]. 이창은 등은 복수 에이전트가 멀티모달 지식 정보를 처리·융합하여 전장 상황인식과 의사결정을 지원하는 유·무인 협업 시스템을 구성하였다[8]. 국내 선행연구는 작업계획, 단계적 AI 기능 연계 및 멀티에이전트 협업 구조를 제시하지만, 복수 도구 사이에서 전달되는 artifact의 실행조건을 정량적으로 평가하고 위험도에 따라 보완 여부를 결정하는 문제는 다루지 않는다.
 
 본 논문은 MCP 기반 다중 도구 실행계획의 실행조건을 명시적으로 모델링하고, 조건 위반의 크기를 기반으로 실행 위험도를 산정한 후 위험도가 임계값을 초과한 경우에만 보완을 수행하는 오케스트레이션 기법을 제안한다. 본 연구의 주요 기여는 다음과 같다.
 
@@ -49,7 +49,7 @@ II장에서는 LLM tool planning, reflection 기반 오류 수정 및 MCP 기반
 
 LLM 기반 tool use는 사용자 질의를 기반으로 외부 함수 또는 API를 선택하고, 실행에 필요한 인자를 생성하며, 실행 결과를 후속 추론에 반영하는 문제를 다룬다. 초기 연구는 단일 함수 선택과 인자 정확도에 집중하였으나 최근 평가는 복수 도구 간 의존관계와 다단계 실행계획으로 확대되었다.
 
-BFCL은 LLM의 function calling 성능을 정량적으로 평가하는 벤치마크로서 serial, parallel 및 stateful multi-step function calling을 포함한다[1]. BFCL의 평가 대상은 함수 선택과 호출 형식의 정확성을 중심으로 구성된다. PlanningArena는 다양한 응용 서비스의 API를 포함하는 planning benchmark이며, 사용자 요구를 달성하기 위한 도구 선택, 논리적 추론 및 사용자 정보 해석을 평가한다[2]. PlanGenLLMs는 LLM planner를 completeness, executability, optimality, representation, generalization 및 efficiency의 여섯 평가기준으로 정리하였다[7]. 해당 연구들은 복수 도구를 연결하는 계획 능력의 평가 기반을 제공하지만, tool 간 전달 artifact의 단위, 기준좌표계, 최신성, 신뢰도 및 출처를 독립적인 실행조건으로 모델링하지 않는다.
+BFCL은 LLM의 function calling 성능을 정량적으로 평가하는 벤치마크로서 serial, parallel 및 stateful multi-step function calling을 포함한다[1]. BFCL의 평가 대상은 함수 선택과 호출 형식의 정확성을 중심으로 구성된다. PlanningArena는 다양한 응용 서비스의 API를 포함하는 planning benchmark이며, 사용자 요구를 달성하기 위한 도구 선택, 논리적 추론 및 사용자 정보 해석을 평가한다[2]. PlanGenLLMs는 LLM planner를 completeness, executability, optimality, representation, generalization 및 efficiency의 여섯 평가기준으로 정리하였다[9]. 해당 연구들은 복수 도구를 연결하는 계획 능력의 평가 기반을 제공하지만, tool 간 전달 artifact의 단위, 기준좌표계, 최신성, 신뢰도 및 출처를 독립적인 실행조건으로 모델링하지 않는다.
 
 본 연구는 tool selection accuracy 또는 plan generation accuracy를 대체 지표로 사용하지 않는다. 연구 범위는 planner가 생성한 workflow의 각 dependency에서 artifact가 후속 tool의 실행조건을 충족하는지 평가하고, 필요한 보완을 결정하는 orchestration 단계에 한정된다.
 
@@ -63,7 +63,7 @@ Reflection 기반 접근은 오류 발생 전후의 reasoning을 수정한다는
 
 MCP는 AI application과 외부 데이터 또는 도구 간 상호작용을 표준화하는 protocol이다[3]. Protocol Revision 2025-11-25에서 MCP는 JSON-RPC 2.0 기반의 client-server 통신과 capability negotiation을 정의하며, server primitive로 prompts, resources 및 tools를 제공한다[3]. Tool은 모델이 실행할 수 있는 기능으로 노출된다.
 
-MCP 환경을 대상으로 한 정식 benchmark 연구로 MCP-AgentBench가 제안되었다[8]. MCP-AgentBench는 33개의 operational MCP server와 188개의 tool로 구성된 testbed에서 600개의 query를 평가하고, MCP-mediated tool interaction의 task success를 측정한다. 해당 연구는 MCP 기반 에이전트의 실제 tool-use 평가 범위를 확장하지만 execution-condition deficit과 risk-based selective repair를 평가 대상으로 사용하지 않는다.
+MCP 환경을 대상으로 한 정식 benchmark 연구로 MCP-AgentBench가 제안되었다[10]. MCP-AgentBench는 33개의 operational MCP server와 188개의 tool로 구성된 testbed에서 600개의 query를 평가하고, MCP-mediated tool interaction의 task success를 측정한다. 해당 연구는 MCP 기반 에이전트의 실제 tool-use 평가 범위를 확장하지만 execution-condition deficit과 risk-based selective repair를 평가 대상으로 사용하지 않는다.
 
 MCP의 표준화 대상은 client-server 간 상호작용과 tool interface이다. 표준화된 interface는 서로 다른 provider가 구현한 tool을 하나의 AI application에 연결하는 기반을 제공한다. 반면 domain-specific execution condition은 tool schema만으로 완전하게 표현되지 않는다. 동일 field가 사용하는 물리 단위, 좌표 기준, 허용 데이터 age, confidence threshold 및 provenance requirement는 application-level metadata와 validation을 요구한다. 본 연구는 MCP tool workflow에 execution-condition metadata를 부가하고, tool dependency 단위로 조건 적합성을 평가하는 orchestration layer를 구성한다.
 
@@ -541,9 +541,13 @@ Internal ablation에서 Strict와 Proposed는 OEPVR 83.2%, TSR 91.4%로 동일�
 
 [6] 조준형, 정소이, “LLM 기반 행동 마스킹을 통한 강화학습 에이전트의 작업 계획 효율성 향상,” *전자공학회논문지*, vol. 63, no. 5, pp. 120–130, 2026. doi: 10.5573/ieie.2026.63.5.120.
 
-[7] H. Wei, Z. Zhang, S. He, T. Xia, S. Pan, and F. Liu, “PlanGenLLMs: A Modern Survey of LLM Planning Capabilities,” *Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, pp. 19497–19521, 2025. doi: 10.18653/v1/2025.acl-long.958.
+[7] 우성영, 연혜은, 김영식, “RAG 프롬프트 및 DQN 강화학습 기반 2단 Op-Amp 레이아웃 자동 생성과 LPE 성능 최적화 통합 시스템,” *전자공학회논문지*, vol. 63, no. 2, pp. 19–31, 2026.
 
-[8] Z. Guo, B. Xu, C. Zhu, W. Hong, X. Wang, and Z. Mao, “MCP-AgentBench: Evaluating Real-World Language Agent Performance with MCP-Mediated Tools,” *Proceedings of the AAAI Conference on Artificial Intelligence*, vol. 40, no. 37, pp. 30888–30896, 2026. doi: 10.1609/aaai.v40i37.40347.
+[8] 이창은, 백재욱, 손진희, 이소연, 하영국, “전투병의 인지증강을 위한 멀티에이전트 기반 유무인 협업 시스템,” *전자공학회논문지*, vol. 59, no. 2, pp. 126–134, 2022.
+
+[9] H. Wei, Z. Zhang, S. He, T. Xia, S. Pan, and F. Liu, “PlanGenLLMs: A Modern Survey of LLM Planning Capabilities,” *Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, pp. 19497–19521, 2025. doi: 10.18653/v1/2025.acl-long.958.
+
+[10] Z. Guo, B. Xu, C. Zhu, W. Hong, X. Wang, and Z. Mao, “MCP-AgentBench: Evaluating Real-World Language Agent Performance with MCP-Mediated Tools,” *Proceedings of the AAAI Conference on Artificial Intelligence*, vol. 40, no. 37, pp. 30888–30896, 2026. doi: 10.1609/aaai.v40i37.40347.
 
 ---
 
