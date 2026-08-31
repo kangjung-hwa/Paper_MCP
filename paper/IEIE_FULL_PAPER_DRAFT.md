@@ -319,7 +319,7 @@ Execution-condition violation은 coordinate, unit, freshness, confidence, proven
 | Freshness | artifact age가 required maximum age를 초과 |
 | Confidence | artifact confidence가 required minimum보다 낮음 |
 | Provenance | artifact source/verification property가 requirement를 충족하지 않음 |
-| Compound | 2~4개의 condition violation이 동시에 발생 |
+| Compound | 2–4개의 condition violation이 동시에 발생 |
 
 Violation injection은 실행조건별 효과와 compound condition에 대한 robustness를 분리하여 분석하기 위해 사용하였다.
 
@@ -406,7 +406,7 @@ MIRROR-inspired와 Tool-MVR-inspired는 각각 SCCR 60.0%, OEPVR 66.6%, TSR 70.0
 
 Correction timing은 실행비용에 차이를 발생시켰다. MIRROR-inspired는 pre-execution correction을 task당 평균 0.333회 수행하였고 평균 added latency는 140.0 ms였다. Tool-MVR-inspired는 initial execution 이후 Error–Reflection–Correction–Retry 절차를 수행하여 평균 added calls 1.500, added latency 495.1 ms를 기록하였다. Tool-MVR-inspired의 비용에는 initial failed execution, correction 및 retry가 포함된다.
 
-Tool-MVR-inspired와 MIRROR-inspired의 평균 total latency difference는 +276.8 ms였으며 95% bootstrap CI는 250.2~306.1 ms였다. 평균 call count difference는 +0.667이며 95% CI는 0.611~0.729였다. Reliability가 동일한 조건에서 post-execution recovery가 pre-execution correction보다 높은 retry cost를 발생시켰다.
+Tool-MVR-inspired와 MIRROR-inspired의 평균 total latency difference는 +276.8 ms였으며 95% bootstrap CI는 250.2–306.1 ms였다. 평균 call count difference는 +0.667이며 95% CI는 0.611–0.729였다. Reliability가 동일한 조건에서 post-execution recovery가 pre-execution correction보다 높은 retry cost를 발생시켰다.
 
 Proposed의 total latency는 1541.7 ms로 MIRROR-inspired의 1542.0 ms와 거의 동일하였다. Proposed와 MIRROR-inspired의 latency difference는 -0.27 ms였으며 confidence interval에 0이 포함되었다. Proposed의 평균 call count는 7.366으로 MIRROR-inspired의 6.500보다 높았다. Tool-MVR-inspired와 비교하면 Proposed의 total latency는 277.1 ms 낮았고 평균 call count는 약 0.199 높았다.
 
