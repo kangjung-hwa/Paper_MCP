@@ -6,14 +6,14 @@ from src.oracle.task_outcomes import route_outcome
 
 
 def gt_success(workflow: Workflow, task: TaskInstance, registry: ToolRegistry) -> bool:
-    rows, artifacts = simulate_oracle(workflow, task, registry)
-    ok, _ = route_outcome(workflow, task, rows)
+    _, artifacts = simulate_oracle(workflow, task, registry)
+    ok, _ = route_outcome(workflow, task, artifacts, registry)
     return ok and workflow.goal in artifacts
 
 
 def failure_reason(workflow: Workflow, task: TaskInstance, registry: ToolRegistry) -> str:
-    rows, artifacts = simulate_oracle(workflow, task, registry)
+    _, artifacts = simulate_oracle(workflow, task, registry)
     if workflow.goal not in artifacts:
         return "goal_artifact_missing"
-    _, reason = route_outcome(workflow, task, rows)
+    _, reason = route_outcome(workflow, task, artifacts, registry)
     return reason
