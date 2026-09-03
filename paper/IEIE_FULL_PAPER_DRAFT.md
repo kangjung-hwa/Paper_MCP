@@ -6,7 +6,7 @@
 
 ## 요 약
 
-Model Context Protocol(MCP)은 AI 에이전트가 외부 도구를 표준화된 방식으로 탐색하고 호출할 수 있도록 지원한다. 그러나 도구 간 입·출력 스키마가 호환되더라도 전달 데이터의 단위, 기준좌표계, 최신성, 신뢰도 및 출처 조건이 후속 도구의 요구조건과 일치하지 않으면 실행계획의 운용 유효성이 저하될 수 있다. 본 논문은 MCP 기반 다중 도구 실행계획에서 도구 간 전달 데이터의 실행조건을 명시적으로 정의하고, 조건 위반 정도로부터 실행 위험도를 계산하여 위험도가 임계값을 초과한 경우에만 보완을 수행하는 오케스트레이션 기법을 제안한다. 복수의 보완 후보가 존재할 때는 보완 후의 잔여 위험도와 추가 지연시간 및 도구 호출 수를 함께 고려하여 보완 방법을 선택한다. 실험 결과 제안방법은 OEPVR 83.2%와 TSR 91.4%를 기록하였다. Direct Tool-Planning 대비 OEPVR은 25.2%p, TSR은 21.4%p 증가하였고, MIRROR-inspired 및 Tool-MVR-inspired 대비 OEPVR은 16.7%p, TSR은 21.4%p 증가하였다. 또한 모든 조건 위반을 보완하는 Strict 방식과 동일한 OEPVR 및 TSR을 유지하면서 보완 수행률을 100%에서 47.3%로 감소시켰다. 결과는 MCP 기반 실행계획을 평가할 때 스키마 연결성뿐 아니라 전달 데이터의 실행조건과 보완 비용을 함께 고려해야 함을 보여준다.
+Model Context Protocol(MCP)은 AI 에이전트가 외부 도구를 표준화된 방식으로 탐색하고 호출할 수 있도록 지원한다. 그러나 도구 간 입·출력 스키마가 호환되더라도 전달 데이터의 단위, 기준좌표계, 최신성, 신뢰도 및 출처 조건이 후속 도구의 요구조건과 일치하지 않으면 실행계획의 운용 유효성이 저하될 수 있다. 본 논문은 MCP 기반 다중 도구 실행계획에서 도구 간 전달 데이터의 실행조건을 명시적으로 정의하고, 조건 위반 정도로부터 실행 위험도를 계산하여 위험도가 임계값을 초과한 경우에만 보완을 수행하는 오케스트레이션 기법을 제안한다. 복수의 보완 후보가 존재할 때는 보완 후의 잔여 위험도와 추가 지연시간 및 도구 호출 수를 함께 고려하여 보완 방법을 선택한다. 실험 결과 제안방법은 OEPVR 83.2%와 TSR 86.7%를 기록하였다. Direct Tool-Planning 대비 OEPVR은 25.2%p, TSR은 16.7%p 증가하였고, MIRROR-inspired 및 Tool-MVR-inspired 대비 OEPVR은 16.7%p, TSR은 16.7%p 증가하였다. 또한 모든 조건 위반을 보완하는 Strict 방식과 동일한 OEPVR 및 TSR을 유지하면서 보완 수행률을 100%에서 47.3%로 감소시켰다. 결과는 MCP 기반 실행계획을 평가할 때 스키마 연결성뿐 아니라 전달 데이터의 실행조건과 보완 비용을 함께 고려해야 함을 보여준다.
 
 **주요어:** Model Context Protocol, AI Agent, Tool Orchestration, Execution Validity, Risk-Aware Planning
 
@@ -14,7 +14,7 @@ Model Context Protocol(MCP)은 AI 에이전트가 외부 도구를 표준화된 
 
 ## Abstract
 
-Although Model Context Protocol (MCP) enables AI agents to discover and invoke external tools through a standardized interface, schema-level connectivity alone does not guarantee the operational validity of a multi-tool execution plan. Data exchanged between tools may violate downstream requirements on units, reference frames, freshness, confidence, or provenance even when their schemas are structurally compatible. This paper proposes a risk-aware MCP-based AI agent orchestration method that explicitly models execution conditions of inter-tool data, quantifies the degree of condition violations, and selectively inserts repair tools only when the resulting execution risk exceeds a predefined threshold. When multiple repair candidates are available, the proposed method jointly considers residual risk, additional latency, and tool-call cost. Experimental results show that the proposed method achieves an Operational Execution Plan Validity Rate (OEPVR) of 83.2% and a Task Success Rate (TSR) of 91.4%. Compared with Direct Tool-Planning, OEPVR and TSR increase by 25.2 and 21.4 percentage points, respectively. Compared with MIRROR-inspired and Tool-MVR-inspired baselines, OEPVR and TSR increase by 16.7 and 21.4 percentage points, respectively. In addition, the proposed method preserves the same OEPVR and TSR as the Strict all-repair strategy while reducing the repair rate from 100% to 47.3%. The results indicate that MCP-based orchestration should consider execution-condition validity and repair cost in addition to schema-level connectivity.
+Although Model Context Protocol (MCP) enables AI agents to discover and invoke external tools through a standardized interface, schema-level connectivity alone does not guarantee the operational validity of a multi-tool execution plan. Data exchanged between tools may violate downstream requirements on units, reference frames, freshness, confidence, or provenance even when their schemas are structurally compatible. This paper proposes a risk-aware MCP-based AI agent orchestration method that explicitly models execution conditions of inter-tool data, quantifies the degree of condition violations, and selectively inserts repair tools only when the resulting execution risk exceeds a predefined threshold. When multiple repair candidates are available, the proposed method jointly considers residual risk, additional latency, and tool-call cost. Experimental results show that the proposed method achieves an Operational Execution Plan Validity Rate (OEPVR) of 83.2% and a Task Success Rate (TSR) of 86.7%. Compared with Direct Tool-Planning, OEPVR and TSR increase by 25.2 and 16.7 percentage points, respectively. Compared with MIRROR-inspired and Tool-MVR-inspired baselines, OEPVR and TSR increase by 16.7 and 16.7 percentage points, respectively. In addition, the proposed method preserves the same OEPVR and TSR as the Strict all-repair strategy while reducing the repair rate from 100% to 47.3%. The results indicate that MCP-based orchestration should consider execution-condition validity and repair cost in addition to schema-level connectivity.
 
 **Keywords:** Model Context Protocol, AI Agent, Tool Orchestration, Execution Validity, Risk-Aware Planning
 
@@ -368,9 +368,9 @@ OEPVR은 스키마 유형, 의미 유형, 단위, 기준좌표계 및 출처에 
 | Direct Tool-Planning | 0.533 | 0.580 | 0.700 | **6.167** | **1380.5** |
 | MIRROR-inspired | 0.600 | 0.666 | 0.700 | 6.500 | 1542.0 |
 | Tool-MVR-inspired | 0.600 | 0.666 | 0.700 | 7.167 | 1818.8 |
-| **제안방법** | **0.772** | **0.832** | **0.914** | 7.366 | 1541.7 |
+| **제안방법** | **0.772** | **0.832** | **0.867** | 7.366 | 1541.7 |
 
-제안방법은 OEPVR 83.2%, TSR 91.4%를 기록하였다. Direct Tool-Planning 대비 OEPVR은 25.2%p, TSR은 21.4%p 증가하였다. MIRROR-inspired 및 Tool-MVR-inspired 대비 OEPVR은 16.7%p, TSR은 21.4%p 증가하였다. 실행조건 위반이 포함된 시나리오에서 제안방법은 전달 데이터와 후속 도구의 요구조건을 검증하고 필요한 보완을 수행하므로, 실행계획 생성 단계의 스키마 연결만으로 확인되지 않는 조건 위반이 결과 차이에 포함된다.
+제안방법은 OEPVR 83.2%, TSR 86.7%를 기록하였다. Direct Tool-Planning 대비 OEPVR은 25.2%p, TSR은 16.7%p 증가하였다. MIRROR-inspired 및 Tool-MVR-inspired 대비 OEPVR은 16.7%p, TSR은 16.7%p 증가하였다. 실행조건 위반이 포함된 시나리오에서 제안방법은 전달 데이터와 후속 도구의 요구조건을 검증하고 필요한 보완을 수행하므로, 실행계획 생성 단계의 스키마 연결만으로 확인되지 않는 조건 위반이 결과 차이에 포함된다.
 
 **[그림 5 삽입]**  
 `results/v4_1_external_baselines/figures/fig_external_validity_comparison.pdf`
@@ -380,9 +380,9 @@ OEPVR은 스키마 유형, 의미 유형, 단위, 기준좌표계 및 출처에 
 
 그림 5에서 제안방법은 비교 기법보다 높은 OEPVR과 TSR을 기록하였다. Direct Tool-Planning의 스키마 연결성은 83.3%였으나 SCCR은 53.3%, OEPVR은 58.0%였다. 구조적으로 연결된 실행계획 가운데 일부가 후속 도구가 요구하는 실행조건 또는 운용 허용범위를 충족하지 않았음을 의미한다. 이 결과는 스키마 수준 호환성과 운용 유효성이 서로 다른 평가 대상임을 보여준다.
 
-위반 유형별 분석에서는 기준좌표계, 단위, 출처 및 복합 위반에서 차이가 크게 나타났다. 기준좌표계 위반에서 Direct Tool-Planning의 OEPVR과 TSR은 각각 29.9%, 43.7%였고 제안방법은 80.5%, 81.6%를 기록하였다. 단위 위반의 OEPVR은 Direct 30.0%, 제안방법 87.8%였다. 출처 위반에서는 Direct의 OEPVR과 TSR이 각각 37.8%, 57.8%였고 제안방법은 91.1%, 88.9%였다.
+위반 유형별 분석에서는 기준좌표계, 단위, 출처 및 복합 위반에서 차이가 크게 나타났다. 기준좌표계 위반에서 Direct Tool-Planning의 OEPVR과 TSR은 각각 29.9%, 43.7%였고 제안방법은 80.5%, 70.1%를 기록하였다. 단위 위반의 OEPVR은 Direct 30.0%, 제안방법 87.8%였고 제안방법의 TSR은 82.2%였다. 출처 위반에서는 Direct의 OEPVR과 TSR이 각각 37.8%, 57.8%였고 제안방법은 91.1%, 82.2%를 기록하였다.
 
-최신성 위반의 OEPVR은 Direct 58.0%, 제안방법 79.5%였으며 신뢰도 위반은 Direct 54.8%, 제안방법 82.8%였다. 복합 위반의 OEPVR은 Direct 35.9%, 제안방법 79.3%였고 TSR은 53.3%에서 89.1%로 증가하였다. 위반 유형별 결과에서 실행 유효성 차이는 특정 한 종류의 실행조건에 한정되지 않고 여러 위반 유형에서 나타났다.
+최신성 위반의 OEPVR은 Direct 58.0%, 제안방법 79.5%였으며 제안방법의 TSR은 76.1%였다. 신뢰도 위반은 Direct OEPVR 54.8%, 제안방법 82.8%였고 제안방법의 TSR은 74.2%였다. 복합 위반의 OEPVR은 Direct 35.9%, 제안방법 79.3%였고 TSR은 53.3%에서 81.5%로 증가하였다. 위반 유형별 결과에서 실행 유효성 차이는 특정 한 종류의 실행조건에 한정되지 않고 여러 위반 유형에서 나타났다.
 
 ## 3. 보완 시점 및 실행비용 분석
 
@@ -404,11 +404,11 @@ Tool-MVR-inspired의 평균 전체 지연시간은 MIRROR-inspired보다 276.8 m
 
 ## 4. 선택적 보완 및 비용 기반 후보 선택 분석
 
-Strict와 제안방법은 OEPVR 83.2%, TSR 91.4%로 동일하였다. SCCR은 Strict 83.2%, 제안방법 77.2%로 제안방법이 6.0%p 낮았다. 제안방법은 일부 실행계획에서 후속 도구의 필수 실행조건과 편차가 존재하는 상태를 유지했지만 운용 유효성과 최종 수행 성공 비율은 동일하였다.
+Strict와 제안방법은 OEPVR 83.2%, TSR 86.7%로 동일하였다. SCCR은 Strict 83.2%, 제안방법 77.2%로 제안방법이 6.0%p 낮았다. 제안방법은 일부 실행계획에서 후속 도구의 필수 실행조건과 편차가 존재하는 상태를 유지했지만 운용 유효성과 최종 수행 성공 비율은 동일하였다.
 
 유효성 전이 분석에서 제안방법의 900개 시나리오 중 54개는 `SCCR=0`이면서 `OEPV=1`이었다. 해당 54개 시나리오가 제안방법과 Strict의 SCCR 6.0%p 차이를 구성하였다. 운용 유효성과 최종 수행 성공 여부는 두 방식에서 동일하였다.
 
-보완 행동을 비교하면 Strict의 보완 수행률은 100%였고 제안방법은 47.3%였다. 제안방법의 보완 정밀도는 45.3%로 Strict의 21.4%보다 높았고, 보완 F1은 62.4%로 Strict의 35.3%보다 높았다. 불필요 보완률(OURR)은 55.8%에서 50.2%로 5.6%p 감소하였다. 평균 추가 지연시간은 53.7 ms에서 43.7 ms로 10.0 ms 감소하였고 평균 추가 호출 수는 0.533에서 0.473으로 감소하였다. Strict와 제안방법의 보완 수행 결과와 실행비용 차이는 그림 7에 나타내었다.
+보완 행동을 비교하면 Strict의 보완 수행률은 100%였고 제안방법은 47.3%였다. 제안방법의 보완 정밀도는 35.2%로 Strict의 16.7%보다 높았고, 보완 F1은 52.1%로 Strict의 28.6%보다 높았다. 불필요 보완률(OURR)은 55.8%에서 50.2%로 5.6%p 감소하였다. 평균 추가 지연시간은 53.7 ms에서 43.7 ms로 10.0 ms 감소하였고 평균 추가 호출 수는 0.533에서 0.473으로 감소하였다. Strict와 제안방법의 보완 수행 결과와 실행비용 차이는 그림 7에 나타내었다.
 
 **[그림 7 삽입]**  
 `results/v4_1_external_baselines/figures/fig_repair_efficiency.pdf`
@@ -418,7 +418,7 @@ Strict와 제안방법은 OEPVR 83.2%, TSR 91.4%로 동일하였다. SCCR은 Str
 
 그림 7은 제안방법이 Strict와 동일한 OEPVR 및 TSR을 유지하면서 보완 수행률과 추가 지연시간을 감소시킨 결과를 나타낸다. Strict 비교에서는 후속 도구의 모든 실행조건 편차에 보완을 적용하는 방식과 위험도에 따라 보완 여부를 결정하는 방식의 차이를 확인하였다.
 
-위반 심각도별 분석에서도 보완 행동의 차이가 확인되었다. 심각 위반에서 Strict와 제안방법의 TSR은 모두 71.5%였다. 제안방법의 보완 정밀도는 약 91.0%, 보완 F1은 95.3%, 보완 수행률은 78.5%였다. Strict의 보완 수행률은 100%였다.
+위반 심각도별 분석에서도 보완 행동의 차이가 확인되었다. 심각 위반에서 Strict와 제안방법의 TSR은 모두 55.6%였다. 제안방법의 보완 정밀도는 약 70.8%, 보완 F1은 82.9%, 보완 수행률은 78.5%였다. Strict의 보완 수행률은 100%였다.
 
 경미 위반에서 두 방식의 TSR은 모두 100%였다. 제안방법의 보완 수행률은 56.3%로 Strict의 100%보다 낮았다. 정상 시나리오에서도 두 방식의 TSR은 모두 100%였으며 제안방법의 보완 수행률은 17.2%였다. 제안방법은 심각 위반에서 높은 보완 수행률을 유지하면서 경미 위반과 정상 시나리오에서는 보완 수행률이 낮게 나타났다.
 
@@ -429,11 +429,11 @@ Strict와 제안방법은 OEPVR 83.2%, TSR 91.4%로 동일하였다. SCCR은 Str
 
 | 방법 | TSR | 추가 지연시간 (ms) | 추가 호출 수 | 보완 F1 |
 |---|---:|---:|---:|---:|
-| Strict | 0.914 | 53.7 | 0.533 | 0.353 |
-| Risk-only Selective | 0.914 | 53.9 | 0.473 | 0.624 |
-| **Risk-Cost Selective** | **0.914** | **43.7** | **0.473** | **0.624** |
+| Strict | 0.867 | 53.7 | 0.533 | 0.286 |
+| Risk-only Selective | 0.867 | 53.9 | 0.473 | 0.521 |
+| **Risk-Cost Selective** | **0.867** | **43.7** | **0.473** | **0.521** |
 
-표 7에서 Risk-only와 Risk-Cost는 TSR 91.4%, 추가 호출 수 및 보완 F1에서 동일한 결과를 기록하였다. 추가 지연시간은 Risk-only 53.9 ms, Risk-Cost 43.7 ms로 10.2 ms 감소하였다. 복수 후보가 존재하는 시나리오 중 약 14.8%에서 비용 항에 의해 선택 후보가 변경되었다.
+표 7에서 Risk-only와 Risk-Cost는 TSR 86.7%, 추가 호출 수 및 보완 F1에서 동일한 결과를 기록하였다. 추가 지연시간은 Risk-only 53.9 ms, Risk-Cost 43.7 ms로 10.2 ms 감소하였다. 복수 후보가 존재하는 시나리오 중 약 14.8%에서 비용 항에 의해 선택 후보가 변경되었다.
 
 Risk-only와 Risk-Cost의 TSR과 보완 F1이 동일한 상태에서 Risk-Cost의 추가 지연시간은 10.2 ms 감소하였다. 비용 항의 효과는 최종 수행 성공 비율 증가보다 보완 후보 선택에 따른 지연시간 감소에서 확인되었다.
 
@@ -445,9 +445,9 @@ Strict와 제안방법의 비교 결과, 제안방법은 동일한 OEPVR과 TSR�
 
 본 논문은 MCP 기반 AI 에이전트가 생성한 다중 도구 실행계획의 실행조건을 정량적으로 평가하고, 실행 위험도와 보완 비용을 기반으로 보완 도구를 선택하는 오케스트레이션 기법을 제안하였다. 제안방법은 스키마 유형, 의미 유형, 단위, 기준좌표계, 최신성, 신뢰도 및 출처의 7개 실행조건을 정의하고 조건 결손도로부터 의존관계별 위험도와 실행계획 위험도를 계산한다. 실행계획 위험도가 임계값을 초과한 경우에만 보완을 수행하며, 복수의 보완 후보에 대해서는 잔여 위험도와 정규화된 지연시간 및 도구 호출 비용을 결합한 목적함수를 사용한다.
 
-24개의 기본 도구와 6개 유형의 평가 시나리오로 구성한 시뮬레이션 환경에서 기법별 900개 시나리오를 평가하였다. 제안방법은 OEPVR 83.2%, TSR 91.4%를 기록하였다. Direct Tool-Planning 대비 OEPVR은 25.2%p, TSR은 21.4%p 증가하였고 MIRROR-inspired 및 Tool-MVR-inspired 대비 OEPVR은 16.7%p, TSR은 21.4%p 증가하였다.
+24개의 기본 도구와 6개 유형의 평가 시나리오로 구성한 시뮬레이션 환경에서 기법별 900개 시나리오를 평가하였다. 제안방법은 OEPVR 83.2%, TSR 86.7%를 기록하였다. Direct Tool-Planning 대비 OEPVR은 25.2%p, TSR은 16.7%p 증가하였고 MIRROR-inspired 및 Tool-MVR-inspired 대비 OEPVR은 16.7%p, TSR은 16.7%p 증가하였다.
 
-Strict 방식과의 비교에서 두 방식은 OEPVR 83.2%, TSR 91.4%로 동일하였다. 제안방법의 보완 수행률은 47.3%로 Strict의 100%보다 낮았고 추가 지연시간은 53.7 ms에서 43.7 ms로 감소하였다. Risk-only와 Risk-Cost 비교에서는 동일한 TSR과 보완 F1을 유지하면서 추가 지연시간이 53.9 ms에서 43.7 ms로 감소하였다.
+Strict 방식과의 비교에서 두 방식은 OEPVR 83.2%, TSR 86.7%로 동일하였다. 제안방법의 보완 수행률은 47.3%로 Strict의 100%보다 낮았고 추가 지연시간은 53.7 ms에서 43.7 ms로 감소하였다. Risk-only와 Risk-Cost 비교에서는 동일한 TSR과 보완 F1을 유지하면서 추가 지연시간이 53.9 ms에서 43.7 ms로 감소하였다.
 
 실험 결과는 MCP 기반 다중 도구 실행계획에서 스키마 연결성, 필수 실행조건 충족, 운용 유효성 및 최종 수행 성공을 구분하여 평가해야 함을 보여준다. 실행조건 인식 기반 위험도 산정과 선택적 보완을 결합한 제안방법은 운용 결과를 유지하면서 보완 수행 범위와 실행비용을 조절하였다.
 
