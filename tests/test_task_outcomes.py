@@ -101,6 +101,31 @@ def test_f5_compound_requires_all_failure_causes_to_be_repaired():
     assert gt_success(complete, task, REGISTRY)
 
 
+def test_f5_threat_map_repair_is_not_blocked_by_unrelated_t17_input_deficit():
+    task = _task(
+        "F5",
+        "coordinate",
+        {"weather": {"confidence": 0.1}},
+    )
+    workflow = initial_workflow("F5", variant_index=2)
+    t16_index = next(i for i, node in enumerate(workflow.nodes) if node.tool_id == "T16")
+    workflow.nodes.insert(
+        t16_index,
+        WorkflowNode(
+            "unrelated_situation_analysis",
+            "T17",
+            {"position": "position", "threat": "threat", "weather": "weather"},
+            {"situation": "unused_situation"},
+        ),
+    )
+    repaired = _repair(workflow, "threat_map", "T26")
+
+    t20 = next(node for node in repaired.nodes if node.tool_id == "T20")
+    assert t20.inputs["threat_map"] == "threat_map_T26_repaired"
+    assert not gt_valid(repaired, task, REGISTRY)  # T17 still sees the unrelated weather deficit.
+    assert gt_success(repaired, task, REGISTRY)
+
+
 @pytest.mark.parametrize("tolerated_patch", [{"confidence": 0.72}, {"age": 6}])
 def test_tsr_allows_operational_margins_without_becoming_strict_conformance(tolerated_patch):
     task = _task(
