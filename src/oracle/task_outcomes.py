@@ -10,6 +10,7 @@ from src.oracle.operational_validity import operational_requirement
 if TYPE_CHECKING:
     from src.mcp.registry import ToolRegistry
     from src.models.contracts import DataArtifact
+    from src.models.workflow import WorkflowNode
 
 
 ROUTE_PLANNERS = {"T19", "T20", "T21", "T22"}
@@ -79,7 +80,7 @@ def _impact_was_remediated(
         return False
 
     world = world_from_task(task)
-    roots: list[tuple[object, str, str]] = [
+    roots: list[tuple["WorkflowNode", str, str]] = [
         (node, input_name, artifact_id)
         for node in critical_nodes
         for input_name, artifact_id in node.inputs.items()
