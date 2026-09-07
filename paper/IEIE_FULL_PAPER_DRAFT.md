@@ -6,7 +6,7 @@
 
 ## 요 약
 
-Model Context Protocol(MCP)은 AI 에이전트가 외부 도구를 표준화된 방식으로 탐색하고 호출할 수 있도록 지원한다. 그러나 도구 간 입·출력 스키마가 호환되더라도 전달 데이터의 단위, 기준좌표계, 최신성, 신뢰도 및 출처 조건이 후속 도구의 요구조건과 일치하지 않으면 실행계획의 운용 유효성이 저하될 수 있다. 본 논문은 MCP 기반 다중 도구 실행계획에서 도구 간 전달 데이터의 실행조건을 명시적으로 정의하고, 조건 위반 정도로부터 실행 위험도를 계산하여 위험도가 임계값을 초과한 경우에만 보완을 수행하는 오케스트레이션 기법을 제안한다. 복수의 보완 후보가 존재할 때는 보완 후의 잔여 위험도와 추가 지연시간 및 도구 호출 수를 함께 고려하여 보완 방법을 선택한다. 실험 결과 제안방법은 OEPVR 83.2%와 TSR 86.7%를 기록하였다. Direct Tool-Planning 대비 OEPVR은 25.2%p, TSR은 16.7%p 증가하였고, MIRROR-inspired 및 Tool-MVR-inspired 대비 OEPVR은 16.7%p, TSR은 16.7%p 증가하였다. 또한 모든 조건 위반을 보완하는 Strict 방식과 동일한 OEPVR 및 TSR을 유지하면서 보완 수행률을 100%에서 47.3%로 감소시켰다. 결과는 MCP 기반 실행계획을 평가할 때 스키마 연결성뿐 아니라 전달 데이터의 실행조건과 보완 비용을 함께 고려해야 함을 보여준다.
+Model Context Protocol(MCP)은 AI 에이전트가 외부 도구를 표준화된 방식으로 탐색하고 호출할 수 있도록 지원한다. 그러나 도구 간 입·출력 스키마가 호환되더라도 전달 데이터의 단위, 기준좌표계, 최신성, 신뢰도 및 출처 조건이 후속 도구의 요구조건과 일치하지 않으면 실행계획의 운용 유효성이 저하될 수 있다. 본 논문은 MCP 기반 다중 도구 실행계획에서 도구 간 전달 데이터의 실행조건을 명시적으로 정의하고, 조건 위반 정도로부터 실행 위험도를 계산하여 위험도가 임계값을 초과한 경우에만 보완을 수행하는 오케스트레이션 기법을 제안한다. 복수의 보완 후보가 존재할 때는 보완 후의 잔여 위험도와 추가 지연시간 및 도구 호출 수를 함께 고려하여 보완 방법을 선택한다. 실험 결과 제안방법은 OEPVR 83.2%와 TSR 86.7%를 기록하였다. Direct Tool-Planning 대비 OEPVR은 25.2%p, TSR은 16.7%p 증가하였고, MIRROR-inspired 및 Tool-MVR-inspired 대비 OEPVR은 16.7%p, TSR은 16.7%p 증가하였다. 또한 모든 실행조건 위반에 보완을 적용하는 Strict 방식과 비교했을 때 동일한 OEPVR 및 TSR을 유지하였다.
 
 **주요어:** Model Context Protocol, AI Agent, Tool Orchestration, Execution Validity, Risk-Aware Planning
 
@@ -14,7 +14,7 @@ Model Context Protocol(MCP)은 AI 에이전트가 외부 도구를 표준화된 
 
 ## Abstract
 
-Although Model Context Protocol (MCP) enables AI agents to discover and invoke external tools through a standardized interface, schema-level connectivity alone does not guarantee the operational validity of a multi-tool execution plan. Data exchanged between tools may violate downstream requirements on units, reference frames, freshness, confidence, or provenance even when their schemas are structurally compatible. This paper proposes a risk-aware MCP-based AI agent orchestration method that explicitly models execution conditions of inter-tool data, quantifies the degree of condition violations, and selectively inserts repair tools only when the resulting execution risk exceeds a predefined threshold. When multiple repair candidates are available, the proposed method jointly considers residual risk, additional latency, and tool-call cost. Experimental results show that the proposed method achieves an Operational Execution Plan Validity Rate (OEPVR) of 83.2% and a Task Success Rate (TSR) of 86.7%. Compared with Direct Tool-Planning, OEPVR and TSR increase by 25.2 and 16.7 percentage points, respectively. Compared with MIRROR-inspired and Tool-MVR-inspired baselines, OEPVR and TSR increase by 16.7 and 16.7 percentage points, respectively. In addition, the proposed method preserves the same OEPVR and TSR as the Strict all-repair strategy while reducing the repair rate from 100% to 47.3%. The results indicate that MCP-based orchestration should consider execution-condition validity and repair cost in addition to schema-level connectivity.
+Although Model Context Protocol (MCP) enables AI agents to discover and invoke external tools through a standardized interface, schema-level connectivity alone does not guarantee the operational validity of a multi-tool execution plan. Data exchanged between tools may violate downstream requirements on units, reference frames, freshness, confidence, or provenance even when their schemas are structurally compatible. This paper proposes a risk-aware MCP-based AI agent orchestration method that explicitly models execution conditions of inter-tool data, quantifies the degree of condition violations, and selectively inserts repair tools only when the resulting execution risk exceeds a predefined threshold. When multiple repair candidates are available, the proposed method jointly considers residual risk, additional latency, and tool-call cost. Experimental results show that the proposed method achieves an Operational Execution Plan Validity Rate (OEPVR) of 83.2% and a Task Success Rate (TSR) of 86.7%. Compared with Direct Tool-Planning, OEPVR and TSR increase by 25.2 and 16.7 percentage points, respectively. Compared with MIRROR-inspired and Tool-MVR-inspired baselines, OEPVR and TSR increase by 16.7 and 16.7 percentage points, respectively. In addition, the proposed method achieves the same OEPVR and TSR as a Strict strategy that applies repair to all execution-condition violations.
 
 **Keywords:** Model Context Protocol, AI Agent, Tool Orchestration, Execution Validity, Risk-Aware Planning
 
@@ -38,7 +38,7 @@ LLM 기반 도구 사용 연구는 사용자의 요구에 적합한 도구 선�
 
 국내에서도 LLM 기반 작업계획, AI 기능의 단계적 연계 및 멀티에이전트 협업에 관한 연구가 수행되고 있다. 강화학습 기반 순차 작업계획에서는 LLM이 생성한 단계별 행동 마스크를 적용하여 탐색 공간을 제한하고 계획 효율을 향상시키는 방법을 제안하였다[6]. Retrieval-Augmented Generation(RAG) 프롬프트 기반 생성과 Deep Q-Network(DQN) 기반 검증·수정·최적화를 결합한 연구에서는 생성-검증-최적화 과정을 자동화한 통합 시스템을 제안하였다[7]. 복수의 에이전트가 멀티모달 지식 정보를 처리·융합하는 연구에서는 전장 상황인식과 의사결정을 지원하는 유·무인 협업 시스템을 구축하였다[8]. 국내 선행연구는 작업계획, 단계적 AI 기능 연계 및 멀티에이전트 협업 구조를 제시하지만, 복수 도구 사이의 전달 데이터에 대해 실행조건을 정량적으로 평가하고 위험도에 따라 보완 여부를 결정하는 문제는 다루지 않는다.
 
-도구 사용 및 실행계획 관련 연구는 도구 선택, 호출 인자, 호출 순서와 최종 작업 성공 여부를 평가하는 기반을 제공한다. 본 연구는 계획 생성기가 생성한 실행계획을 입력으로 받아 도구 간 의존관계에서 전달 데이터가 후속 도구의 요구조건을 충족하는지 평가하고, 필요한 경우 보완 도구를 삽입한다. 따라서 계획 생성기의 성능과 실행계획의 운용 유효성을 구분하여 평가한다.
+도구 사용 및 실행계획 관련 연구는 도구 선택, 호출 인자, 호출 순서와 최종 작업 성공 여부를 평가하는 기반을 제공한다. 본 연구는 계획 생성기가 생성한 실행계획을 입력으로 받아 도구 간 의존관계에서 전달 데이터가 후속 도구의 요구조건을 충족하는지 평가하고, 필요한 경우 보완을 수행한다.
 
 ## 2. 자기검토 기반 오류 수정
 
@@ -52,7 +52,7 @@ MCP는 AI 시스템과 외부 데이터 또는 도구 간 상호작용을 표준
 
 MCP는 통신 방식과 도구 인터페이스를 표준화하여 여러 서버가 제공하는 도구를 하나의 AI 시스템에서 호출할 수 있도록 한다. MCP의 도구 입·출력 스키마는 데이터의 구조적 형식을 정의하지만, 단위, 기준좌표계, 최신성, 신뢰도 및 출처와 같은 실행조건까지 포함하지 않는다. 동일한 위치 데이터라도 도구가 사용하는 기준좌표계가 다를 수 있고, 신뢰도에 대한 최소 요구값도 후속 도구에 따라 달라질 수 있다. 데이터의 허용 경과시간과 출처 요구조건도 도구 간 데이터 전달 과정에서 확인해야 한다.
 
-본 연구는 MCP 자체의 프로토콜 동작을 변경하지 않고, MCP를 통해 연결된 다중 도구 실행계획에 실행조건 메타데이터를 적용한다. 오케스트레이션 계층은 도구 간 의존관계에서 전달 데이터와 후속 도구의 요구조건을 비교하고, 실행계획의 운용 유효성과 보완 필요성을 평가한다.
+본 연구는 MCP 자체의 프로토콜 동작을 변경하지 않고, MCP를 통해 연결된 다중 도구 실행계획에 실행조건 메타데이터를 적용하여 도구 간 의존관계에서 전달 데이터와 후속 도구의 요구조건을 비교하고 실행계획의 운용 유효성과 보완 필요성을 평가한다.
 
 ## 4. 기존 연구와 제안방법의 차이
 
@@ -68,7 +68,7 @@ MCP는 통신 방식과 도구 인터페이스를 표준화하여 여러 서버�
 | Tool-MVR | O | △ | O | X | X | X |
 | **제안방법** | O | **O** | - | **O** | **O** | **O** |
 
-MIRROR와 Tool-MVR은 자기검토 또는 오류 수정방법을 통해 도구 사용 과정을 개선한다[4], [5]. 제안방법은 도구 간 전달 데이터의 실행조건 차이를 계산하고, 산출된 위험도와 보완 비용을 보완 여부 및 후보 선택에 사용한다. 제안방법의 차별점은 정형화된 실행조건의 수치화, 위험도 기반 선택적 보완 및 비용 기반 보완 후보 선택에 있다.
+Direct Tool-Planning은 별도의 실행 전 검토나 실행 후 수정 없이 생성된 실행계획을 그대로 수행하는 방식이다. MIRROR와 Tool-MVR은 자기검토 또는 오류 수정방법을 통해 도구 사용 과정을 개선한다[4], [5]. 제안방법은 도구 간 전달 데이터의 실행조건을 수치화하고, 산출된 위험도와 보완 비용을 이용하여 보완 여부와 보완 후보를 결정한다.
 
 ---
 
