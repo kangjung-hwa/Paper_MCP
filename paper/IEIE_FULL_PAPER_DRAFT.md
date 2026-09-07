@@ -352,7 +352,7 @@ Strict 방식은 모든 필수 실행조건 위반에 보완을 적용하는 설
 **그림 4. 실험 평가 파이프라인**  
 **Fig. 4. Experimental evaluation pipeline**
 
-그림 4의 평가 절차에 따라 각 기법의 실행결과를 동일한 평가 모듈에서 판정하였다. 평가 지표는 네 수준으로 구분하였다. 스키마 연결성(Schema Connectivity)은 선행 도구 출력과 후속 도구 입력의 구조적 연결 여부를 평가한다. Strict Condition Conformance Rate(SCCR)은 후속 도구가 요구하는 필수 실행조건을 모두 충족한 실행계획의 비율이다. Operational Execution Plan Validity Rate(OEPVR)은 표 4의 운용 허용 설정을 적용했을 때 실행 가능한 실행계획의 비율이다. Task Success Rate(TSR)은 평가 모듈에서 판정한 최종 수행 성공 비율이다.
+그림 4의 평가 절차에 따라 각 기법의 실행결과를 동일한 평가 모듈에서 판정하였다. 평가 지표는 네 수준으로 구분하였다. 스키마 연결성(Schema Connectivity)은 선행 도구 출력의 필드 구성과 자료형이 후속 도구의 입력 형식과 호환되는지를 평가한다. Strict Condition Conformance Rate(SCCR)은 후속 도구가 요구하는 필수 실행조건을 모두 충족한 실행계획의 비율이다. Operational Execution Plan Validity Rate(OEPVR)은 표 4의 운용 허용 설정을 적용했을 때 실행 가능한 실행계획의 비율이다. Task Success Rate(TSR)은 평가 모듈에서 판정한 최종 수행 성공 비율이다.
 
 OEPVR은 스키마 유형, 의미 유형, 단위, 기준좌표계 및 출처에 대해 후속 도구의 요구조건을 적용하고, 신뢰도와 최신성에는 표 4의 운용 허용 설정을 적용한다. 신뢰도는 후속 도구의 최소 요구값보다 0.05 낮은 범위까지, 최신성은 후속 도구의 최대 허용 경과시간의 1.4배까지 운용 가능한 범위로 판정하였다.
 
