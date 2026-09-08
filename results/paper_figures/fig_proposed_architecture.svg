@@ -17,14 +17,10 @@
     </marker>
   </defs>
   <rect x="0" y="0" width="1740" height="680" fill="#ffffff"/>
-
-  <!-- Inputs -->
   <rect class="box" x="18" y="145" width="130" height="90"/>
   <text class="t m" x="83" y="182"><tspan x="83">User</tspan><tspan x="83" dy="26">Request</tspan></text>
   <rect class="box" x="18" y="270" width="130" height="90"/>
   <text class="t m" x="83" y="307"><tspan x="83">Tool</tspan><tspan x="83" dy="26">Registry</tspan></text>
-
-  <!-- Stage 1 -->
   <rect x="180" y="90" width="330" height="300" fill="#eef6ff" stroke="#5b8db8" class="panel"/>
   <circle cx="345" cy="90" r="28" fill="#466f93"/>
   <text class="badgeText" x="345" y="90">1</text>
@@ -33,30 +29,20 @@
   <text class="t m" x="345" y="219">Tool Selection</text>
   <rect class="box" x="215" y="270" width="260" height="80"/>
   <text class="t m" x="345" y="302"><tspan x="345">Dependency</tspan><tspan x="345" dy="26">Construction</tspan></text>
-
-  <!-- Initial plan -->
   <rect class="box" x="535" y="200" width="120" height="125"/>
   <text class="t m" x="595" y="245"><tspan x="595">Initial</tspan><tspan x="595" dy="25">Plan</tspan><tspan x="595" dy="27" class="math">W</tspan></text>
-
-  <!-- Stage 2 -->
   <rect x="690" y="80" width="480" height="340" fill="#fff8e9" stroke="#b68a49" class="panel"/>
   <circle cx="930" cy="80" r="28" fill="#b08343"/>
   <text class="badgeText" x="930" y="80">2</text>
   <text class="t h" x="930" y="125">Risk Assessment</text>
-
-  <rect class="box" x="715" y="160" width="430" height="120"/>
+  <rect class="box" x="715" y="160" width="430" height="135"/>
   <text class="t m" x="930" y="194">Execution Conditions Check</text>
-  <rect x="735" y="210" width="390" height="52" fill="#fff" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 4" rx="6" ry="6"/>
-  <text class="t s" x="930" y="231"><tspan x="930">Schema Type | Semantic Type | Unit</tspan><tspan x="930" dy="21">Reference Frame | Freshness | Confidence | Provenance</tspan></text>
-
+  <rect x="732" y="208" width="396" height="64" fill="#fff" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 4" rx="6" ry="6"/>
+  <text class="t s" x="930" y="229"><tspan x="930">Schema Type | Semantic Type | Unit</tspan><tspan x="930" dy="23">Reference Frame | Freshness | Confidence | Provenance</tspan></text>
   <rect class="box" x="715" y="300" width="430" height="90"/>
   <text class="t m" x="930" y="334"><tspan x="930">Risk Estimation</tspan><tspan x="930" dy="27" class="math">(Dᵢⱼ, Rᵢⱼ, R(W))</tspan></text>
-
-  <!-- Decision -->
   <polygon points="1285,175 1375,255 1285,335 1195,255" fill="#f8fbff" stroke="#475569" stroke-width="1.6"/>
   <text class="t m math" x="1285" y="262">R(W) &gt; θ?</text>
-
-  <!-- Stage 4 -->
   <rect x="1430" y="105" width="190" height="290" fill="#effaf3" stroke="#5d9673" class="panel"/>
   <circle cx="1525" cy="105" r="28" fill="#4f8267"/>
   <text class="badgeText" x="1525" y="105">4</text>
@@ -65,8 +51,6 @@
   <text class="t m" x="1525" y="241"><tspan x="1525">Execute Plan</tspan><tspan x="1525" dy="26" class="math">W (or W′)</tspan></text>
   <rect class="box" x="1640" y="218" width="90" height="70"/>
   <text class="t m" x="1685" y="260">Result</text>
-
-  <!-- Stage 3 -->
   <rect x="800" y="470" width="610" height="165" fill="#fff0f2" stroke="#c97985" class="panel"/>
   <circle cx="1105" cy="470" r="28" fill="#bb6170"/>
   <text class="badgeText" x="1105" y="470">3</text>
@@ -77,17 +61,15 @@
   <text class="t m" x="1112" y="566"><tspan x="1112">Risk + Cost</tspan><tspan x="1112" dy="23">Evaluation</tspan></text>
   <rect class="box" x="1230" y="540" width="150" height="65"/>
   <text class="t m" x="1305" y="563"><tspan x="1305">Select</tspan><tspan x="1305" dy="24" class="math">r* and Update</tspan></text>
-
-  <!-- Arrows -->
   <path class="arrow" d="M148 190 H180"/>
   <path class="arrow" d="M148 315 H180"/>
   <path class="arrow" d="M475 211 H535"/>
   <path class="arrow" d="M655 263 H690"/>
   <path class="arrow" d="M1170 255 H1195"/>
   <path class="arrow" d="M1375 255 H1430"/>
-  <text class="t s" x="1393" y="238">No</text>
+  <text class="t" style="font-size:28px;font-weight:700" x="1402" y="239">No</text>
   <path class="arrow" d="M1285 335 V470"/>
-  <text class="t s" x="1310" y="398">Yes</text>
+  <text class="t" style="font-size:28px;font-weight:700" x="1332" y="405">Yes</text>
   <path class="arrow" d="M995 572 H1025"/>
   <path class="arrow" d="M1200 572 H1230"/>
   <path class="arrow" d="M1380 572 H1525 V300"/>
