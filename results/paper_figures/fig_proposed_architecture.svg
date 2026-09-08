@@ -1,97 +1,101 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="75mm" height="44mm" viewBox="0 0 1200 704" preserveAspectRatio="xMidYMid meet">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid meet">
   <defs>
-    <style>
-      .box{fill:#fff;stroke:#334155;stroke-width:1.8;rx:8;ry:8}
-      .panel{stroke-width:2;rx:12;ry:12}
-      .t{font-family:'Times New Roman','DejaVu Serif',serif;fill:#0f172a;text-anchor:middle}
-      .h{font-size:35px;font-weight:700}
-      .m{font-size:29px}
-      .s{font-size:23px}
-      .xs{font-size:20px}
-      .math{font-style:italic}
-      .badge{font-family:'Times New Roman','DejaVu Serif',serif;fill:#fff;font-size:31px;font-weight:700;text-anchor:middle;dominant-baseline:middle}
-      .arrow{stroke:#0f172a;stroke-width:2.8;fill:none;marker-end:url(#arrow)}
-      .thin{stroke:#0f172a;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
-    </style>
-    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,8 L10,4 z" fill="#0f172a"/>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1f2937"/>
     </marker>
+    <style>
+      .panel{stroke-width:1.8}
+      .box{fill:#ffffff;stroke:#334155;stroke-width:1.6}
+      .dash{fill:#ffffff;stroke:#94a3b8;stroke-width:1.4;stroke-dasharray:6 5}
+      .num{font:700 28px 'Times New Roman',serif;fill:#ffffff;text-anchor:middle}
+      .head{font:700 32px 'Times New Roman',serif;fill:#0f172a;text-anchor:middle}
+      .main{font:400 27px 'Times New Roman',serif;fill:#111827;text-anchor:middle}
+      .small{font:400 21px 'Times New Roman',serif;fill:#111827;text-anchor:middle}
+      .math{font:italic 27px 'Times New Roman',serif;fill:#111827;text-anchor:middle}
+      .line{stroke:#1f2937;stroke-width:2.3;fill:none;marker-end:url(#arrow)}
+      .thin{stroke:#475569;stroke-width:1.8;fill:none;marker-end:url(#arrow)}
+    </style>
   </defs>
 
-  <rect x="0" y="0" width="1200" height="704" fill="#fff"/>
+  <rect x="0" y="0" width="1200" height="560" fill="#ffffff"/>
 
   <!-- Inputs -->
-  <rect class="box" x="18" y="150" width="120" height="88"/>
-  <text class="t m" x="78" y="186"><tspan x="78">User</tspan><tspan x="78" dy="30">Request</tspan></text>
-  <rect class="box" x="18" y="275" width="120" height="88"/>
-  <text class="t m" x="78" y="311"><tspan x="78">Tool</tspan><tspan x="78" dy="30">Registry</tspan></text>
+  <rect x="18" y="165" width="100" height="82" class="box"/>
+  <text x="68" y="198" class="main"><tspan x="68">User</tspan><tspan x="68" dy="29">Request</tspan></text>
+  <rect x="18" y="285" width="100" height="82" class="box"/>
+  <text x="68" y="318" class="main"><tspan x="68">Tool</tspan><tspan x="68" dy="29">Registry</tspan></text>
 
-  <!-- 1. Plan generation -->
-  <rect x="165" y="92" width="245" height="320" fill="#eef6ff" stroke="#5b8db8" class="panel"/>
-  <circle cx="288" cy="92" r="27" fill="#466f93"/>
-  <text class="badge" x="288" y="92">1</text>
-  <text class="t h" x="288" y="142">Plan Generation</text>
-  <rect class="box" x="195" y="190" width="185" height="72"/>
-  <text class="t m" x="288" y="236">Tool Selection</text>
-  <rect class="box" x="195" y="290" width="185" height="82"/>
-  <text class="t m" x="288" y="323"><tspan x="288">Dependency</tspan><tspan x="288" dy="30">Construction</tspan></text>
+  <!-- Stage 1 -->
+  <rect x="145" y="115" width="210" height="290" fill="#eef5fb" stroke="#5f7893" class="panel"/>
+  <circle cx="250" cy="115" r="26" fill="#506f90"/>
+  <text x="250" y="124" class="num">1</text>
+  <text x="250" y="160" class="head">Plan Generation</text>
+  <rect x="170" y="200" width="160" height="70" class="box"/>
+  <text x="250" y="244" class="main">Tool Selection</text>
+  <rect x="170" y="300" width="160" height="78" class="box"/>
+  <text x="250" y="329" class="main"><tspan x="250">Dependency</tspan><tspan x="250" dy="29">Construction</tspan></text>
 
   <!-- Initial plan -->
-  <rect class="box" x="438" y="205" width="112" height="118"/>
-  <text class="t m" x="494" y="242"><tspan x="494">Initial</tspan><tspan x="494" dy="30">Plan</tspan><tspan x="494" dy="31" class="math">W</tspan></text>
+  <rect x="385" y="205" width="105" height="120" class="box"/>
+  <text x="437" y="242" class="main"><tspan x="437">Initial</tspan><tspan x="437" dy="29">Plan</tspan></text>
+  <text x="437" y="304" class="math">W</text>
 
-  <!-- 2. Risk assessment -->
-  <rect x="580" y="72" width="395" height="365" fill="#fff8e9" stroke="#b68a49" class="panel"/>
-  <circle cx="778" cy="72" r="27" fill="#b08343"/>
-  <text class="badge" x="778" y="72">2</text>
-  <text class="t h" x="778" y="122">Risk Assessment</text>
+  <!-- Stage 2 -->
+  <rect x="520" y="80" width="330" height="355" fill="#fbf6ec" stroke="#a58a5d" class="panel"/>
+  <circle cx="685" cy="80" r="26" fill="#a17c3f"/>
+  <text x="685" y="89" class="num">2</text>
+  <text x="685" y="125" class="head">Risk Assessment</text>
 
-  <rect class="box" x="610" y="162" width="335" height="150"/>
-  <text class="t m" x="778" y="198">Execution Conditions</text>
-  <text class="t s" x="778" y="238"><tspan x="778">Schema Type · Semantic Type · Unit</tspan><tspan x="778" dy="30">Reference Frame · Freshness</tspan><tspan x="778" dy="30">Confidence · Provenance</tspan></text>
+  <rect x="545" y="165" width="280" height="145" class="box"/>
+  <text x="685" y="199" class="main">Execution Conditions Check</text>
+  <rect x="560" y="220" width="250" height="72" class="dash"/>
+  <text x="685" y="242" class="small"><tspan x="685">Schema Type · Semantic Type · Unit</tspan><tspan x="685" dy="24">Reference Frame · Freshness</tspan><tspan x="685" dy="24">Confidence · Provenance</tspan></text>
 
-  <rect class="box" x="610" y="335" width="335" height="75"/>
-  <text class="t m" x="778" y="366"><tspan x="778">Risk Estimation</tspan><tspan x="778" dy="31" class="math">Dᵢⱼ, Rᵢⱼ, R(W)</tspan></text>
+  <rect x="545" y="335" width="280" height="78" class="box"/>
+  <text x="685" y="365" class="main">Risk Estimation</text>
+  <text x="685" y="399" class="math">Dᵢⱼ, Rᵢⱼ, R(W)</text>
 
   <!-- Decision -->
-  <polygon points="1052,186 1124,258 1052,330 980,258" fill="#f8fbff" stroke="#475569" stroke-width="2"/>
-  <text class="t m math" x="1052" y="266">R(W) &gt; θ?</text>
+  <polygon points="930,185 995,250 930,315 865,250" fill="#f8fafc" stroke="#475569" stroke-width="1.8"/>
+  <text x="930" y="245" class="math">R(W) &gt; θ?</text>
 
   <!-- Final plan -->
-  <rect class="box" x="1090" y="385" width="92" height="82"/>
-  <text class="t m" x="1136" y="421"><tspan x="1136">Final</tspan><tspan x="1136" dy="30">Plan</tspan></text>
+  <rect x="1035" y="190" width="145" height="120" class="box"/>
+  <text x="1107" y="231" class="main">Final Plan</text>
+  <text x="1107" y="273" class="math">W or W⊕r*</text>
 
-  <!-- 3. Selective repair -->
-  <rect x="675" y="495" width="420" height="170" fill="#fff0f2" stroke="#c97985" class="panel"/>
-  <circle cx="885" cy="495" r="27" fill="#bb6170"/>
-  <text class="badge" x="885" y="495">3</text>
-  <text class="t h" x="885" y="543">Selective Repair</text>
-  <rect class="box" x="705" y="575" width="118" height="62"/>
-  <text class="t s" x="764" y="600"><tspan x="764">Candidate</tspan><tspan x="764" dy="25">Generation</tspan></text>
-  <rect class="box" x="835" y="575" width="128" height="62"/>
-  <text class="t s" x="899" y="600"><tspan x="899">Residual Risk</tspan><tspan x="899" dy="25">+ Cost</tspan></text>
-  <rect class="box" x="975" y="575" width="90" height="62"/>
-  <text class="t s" x="1020" y="600"><tspan x="1020">Select</tspan><tspan x="1020" dy="25" class="math">r*</tspan></text>
+  <!-- Stage 3 -->
+  <rect x="720" y="410" width="460" height="125" fill="#fbf0f2" stroke="#a66d78" class="panel"/>
+  <circle cx="950" cy="410" r="26" fill="#9a5f69"/>
+  <text x="950" y="419" class="num">3</text>
+  <text x="950" y="455" class="head">Selective Repair</text>
+
+  <rect x="745" y="477" width="125" height="44" class="box"/>
+  <text x="807" y="495" class="small"><tspan x="807">Candidate</tspan><tspan x="807" dy="21">Generation</tspan></text>
+  <rect x="885" y="477" width="135" height="44" class="box"/>
+  <text x="952" y="495" class="small"><tspan x="952">Residual Risk</tspan><tspan x="952" dy="21">+ Cost</tspan></text>
+  <rect x="1035" y="477" width="120" height="44" class="box"/>
+  <text x="1095" y="495" class="small"><tspan x="1095">Select</tspan><tspan x="1095" dy="21">r*</tspan></text>
 
   <!-- Main flow -->
-  <path class="arrow" d="M138 194 H165"/>
-  <path class="arrow" d="M138 319 H165"/>
-  <path class="arrow" d="M410 252 H438"/>
-  <path class="arrow" d="M550 264 H580"/>
-  <path class="arrow" d="M975 258 H980"/>
+  <line x1="118" y1="206" x2="145" y2="206" class="line"/>
+  <line x1="118" y1="326" x2="145" y2="326" class="line"/>
+  <line x1="330" y1="235" x2="385" y2="245" class="line"/>
+  <line x1="330" y1="339" x2="385" y2="290" class="line"/>
+  <line x1="490" y1="265" x2="520" y2="265" class="line"/>
+  <line x1="850" y1="250" x2="865" y2="250" class="line"/>
 
-  <!-- Branches -->
-  <path class="arrow" d="M1124 258 H1168 V385 H1136"/>
-  <text class="t s" x="1150" y="242">No</text>
-  <path class="arrow" d="M1052 330 V495"/>
-  <text class="t s" x="1080" y="417">Yes</text>
+  <!-- Decision branches -->
+  <line x1="995" y1="250" x2="1035" y2="250" class="line"/>
+  <text x="1017" y="228" class="small">No</text>
+  <path d="M930 315 L930 410" class="line"/>
+  <text x="954" y="360" class="small">Yes</text>
 
-  <!-- Repair flow -->
-  <path class="thin" d="M823 606 H835"/>
-  <path class="thin" d="M963 606 H975"/>
+  <!-- Repair internal flow -->
+  <line x1="870" y1="499" x2="885" y2="499" class="thin"/>
+  <line x1="1020" y1="499" x2="1035" y2="499" class="thin"/>
 
-  <!-- Re-check and final output -->
-  <path class="arrow" d="M1020 575 V548 H650 V410"/>
-  <text class="t xs" x="830" y="532">Re-check</text>
-  <path class="arrow" d="M1095 606 H1136 V467"/>
+  <!-- Re-check loop -->
+  <path d="M1095 477 L1095 445 L860 445 L860 392 L825 392" class="line"/>
+  <text x="980" y="437" class="small">Re-check</text>
 </svg>
