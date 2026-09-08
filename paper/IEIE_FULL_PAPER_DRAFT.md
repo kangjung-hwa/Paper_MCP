@@ -175,15 +175,7 @@ R(W)>\theta
 \tag{8}
 \]
 
-\(R(W)\)는 식 (7)에서 정의한 실행계획 위험도이며, \(\theta\)는 보완 수행 여부를 결정하는 위험도 임계값이다. Strict 방식은 하나 이상의 필수 실행조건이 요구조건을 만족하지 않으면 보완을 수행한다. 제안방법은 계산된 실행계획 위험도가 임계값을 초과한 경우에 보완을 수행한다. 두 방식의 보완 여부 결정 차이는 그림 2에 나타내었다.
-
-**[그림 2 삽입]**  
-`results/paper_figures/fig_selective_repair_example.pdf`
-
-**그림 2. Strict 방식과 제안하는 선택적 보완의 개념 비교**  
-**Fig. 2. Conceptual comparison between strict all-repair and risk-aware selective repair**
-
-그림 2에서 Strict 방식은 하나 이상의 필수 실행조건이 요구조건을 만족하지 않으면 보완을 수행한다. 제안방법은 계산된 실행계획 위험도가 임계값을 초과한 경우에 보완을 수행한다. 선택적 보완의 목적은 모든 필수 실행조건을 요구조건에 맞추는 것 자체를 최대화하는 데 있지 않다. 본 연구의 목적은 운용 유효성과 작업 성공률을 유지하면서 운용상 허용 가능한 작은 조건 편차에 대한 불필요한 보완을 제한하는 것이다.
+\(R(W)\)는 식 (7)에서 정의한 실행계획 위험도이며, \(\theta\)는 보완 수행 여부를 결정하는 위험도 임계값이다. Strict 방식은 하나 이상의 필수 실행조건이 요구조건을 만족하지 않으면 보완을 수행하는 반면, 제안방법은 계산된 실행계획 위험도가 임계값을 초과한 경우에만 보완을 수행한다. 선택적 보완은 필수 실행조건의 완전한 일치보다 운용 유효성과 최종 수행 결과를 유지하면서 위험도가 낮은 조건 편차에 대한 보완을 제한하는 데 목적이 있다.
 
 실행계획 위험도가 임계값을 초과하면 위반된 실행조건을 보완할 수 있는 방법들을 보완 후보로 구성한다. 보완 후보는 특정 실행조건 위반을 완화하기 위해 실행계획에 적용 가능한 보완 방법을 의미한다. 하나의 실행조건에 여러 보완 방법을 적용할 수 있으므로 복수의 후보가 생성될 수 있으며, 각 후보는 적용 후의 잔여 위험도와 실행비용을 기준으로 비교한다.
 
@@ -265,10 +257,10 @@ Algorithm 1은 초기 실행계획의 도구 간 의존관계를 순차적으로
 
 ## 1. 실험 환경 및 평가 기준
 
-평가환경은 Python 기반 시뮬레이터로 구성하였다. 주요 실험에서는 24개의 기본 도구와 보완 대안 도구를 등록하였다. 기본 도구는 정보 획득, 변환, 갱신, 보강, 분석 에이전트, 계획, 검증 및 시각화 기능으로 구성된다. 시험환경에 등록한 주요 도구와 기능 구분은 표 2에 정리하였다.
+평가환경은 Python 기반 시뮬레이터로 구성하였다. 주요 실험에서는 24개의 기본 도구와 보완 대안 도구를 등록하였다. 기본 도구는 정보 획득, 변환, 갱신, 보강, 분석 에이전트, 계획, 검증 및 시각화 기능으로 구성된다. 실험환경의 주요 도구와 기능 구분은 표 2에 정리하였다.
 
-**표 2. 시험환경에 등록한 주요 도구**  
-**Table 2. Major tools registered in the test environment**
+**표 2. 실험환경 도구 구성**  
+**Table 2. Tool configuration of the experimental environment**
 
 | 구분 | 도구 |
 |---|---|
@@ -322,27 +314,27 @@ Algorithm 1은 초기 실행계획의 도구 간 의존관계를 순차적으로
 
 MIRROR와 Tool-MVR은 본 연구와 입력 및 실행 구조가 다르므로 각 연구의 핵심 오류 검토 및 수정 절차를 MCP 기반 실행계획 환경에 맞게 구성하였다. 이에 따라 각각 MIRROR-inspired와 Tool-MVR-inspired로 표기하였다. MIRROR-inspired는 MIRROR[4]의 실행 전 자기검토 개념을 적용하여 실행계획과 도구 정보에서 확인 가능한 데이터, 스키마, 의미적 의존관계, 목표 경로, 중복 도구 및 도구 순서를 검토하고 의존관계 오류를 수정한다. Tool-MVR-inspired는 Tool-MVR[5]의 Error–Reflection–Correction 구조를 적용하여 초기 실행계획을 실행한 뒤 관측 가능한 오류가 발생한 시나리오에서 자기검토, 수정 및 재실행을 수행한다.
 
-Strict 방식은 모든 필수 실행조건 위반에 보완을 적용하는 설정으로 구성하였으며, 제안방법의 선택적 보완 효과를 분석하기 위한 기준으로 사용하였다. Strict와 제안방법의 보완 여부 결정 차이와 각 기법의 보완 시점은 그림 3에 나타내었다.
+Strict 방식은 모든 필수 실행조건 위반에 보완을 적용하는 설정으로 구성하였으며, 제안방법의 선택적 보완 효과를 분석하기 위한 기준으로 사용하였다. 비교 기법과 제안방법의 보완 시점은 그림 2에 나타내었다.
 
-**[그림 3 삽입]**  
+**[그림 2 삽입]**  
 `results/paper_figures/fig_correction_timing_concept.pdf`
 
-**그림 3. 기법별 보완 시점**  
-**Fig. 3. Correction timing of the compared methods**
+**그림 2. 기법별 보완 시점**  
+**Fig. 2. Correction timing of the compared methods**
 
-그림 3은 실행 전 검토를 수행하는 MIRROR-inspired, 실행 후 수정·재실행을 수행하는 Tool-MVR-inspired, 실행조건 검증 후 필요한 보완을 실행 전에 수행하는 제안방법의 처리 시점을 구분한다.
+그림 2는 실행 전 검토를 수행하는 MIRROR-inspired, 실행 후 수정·재실행을 수행하는 Tool-MVR-inspired, 실행조건 검증 후 보완을 수행하는 제안방법의 처리 시점을 구분한다.
 
 모든 기법은 동일한 평가 시나리오와 도구 정보를 이용하여 실행계획을 생성하였다. 제안방법의 영향을 동일한 조건에서 비교하기 위해 각 기법에 동일한 초기 실행계획을 적용하였다.
 
-평가 모듈은 실행계획의 실행조건 충족 여부, 운용 유효성 및 최종 수행 성공 여부를 제안방법의 위험도 계산과 분리하여 판정한다. 평가에는 시나리오별 환경 상태와 수행 결과 조건을 사용하였다. 실험의 평가 절차와 평가 모듈의 위치는 그림 4에 나타내었다.
+평가 모듈은 실행계획의 실행조건 충족 여부, 운용 유효성 및 최종 수행 성공 여부를 제안방법의 위험도 계산과 분리하여 판정한다. 평가에는 시나리오별 환경 상태와 수행 결과 조건을 사용하였다. 실험의 평가 절차와 평가 모듈의 위치는 그림 3에 나타내었다.
 
-**[그림 4 삽입]**  
+**[그림 3 삽입]**  
 `results/paper_figures/fig_experimental_pipeline.pdf`
 
-**그림 4. 실험 평가 파이프라인**  
-**Fig. 4. Experimental evaluation pipeline**
+**그림 3. 실험 평가 파이프라인**  
+**Fig. 3. Experimental evaluation pipeline**
 
-그림 4의 평가 절차에 따라 각 기법의 실행결과를 동일한 평가 모듈에서 판정하였다. 평가 지표는 네 수준으로 구분하였다. 스키마 연결성(Schema Connectivity)은 선행 도구 출력의 필드 구성과 자료형이 후속 도구의 입력 형식과 호환되는지를 평가한다. Strict Condition Conformance Rate(SCCR)은 후속 도구가 요구하는 필수 실행조건을 모두 충족한 실행계획의 비율이다. Operational Execution Plan Validity Rate(OEPVR)은 실행조건의 일부 편차를 허용했을 때 실행 가능한 실행계획의 비율이다. Task Success Rate(TSR)은 평가 모듈에서 판정한 최종 수행 성공 비율이다.
+그림 3의 평가 절차에 따라 각 기법의 실행결과를 동일한 평가 모듈에서 판정하였다. 평가 지표는 네 수준으로 구분하였다. 스키마 연결성(Schema Connectivity)은 선행 도구 출력의 필드 구성과 자료형이 후속 도구의 입력 형식과 호환되는지를 평가한다. Strict Condition Conformance Rate(SCCR)은 후속 도구가 요구하는 필수 실행조건을 모두 충족한 실행계획의 비율이다. Operational Execution Plan Validity Rate(OEPVR)은 실행조건의 일부 편차를 허용했을 때 실행 가능한 실행계획의 비율이다. Task Success Rate(TSR)은 평가 모듈에서 판정한 최종 수행 성공 비율이다.
 
 OEPVR은 스키마 유형, 의미 유형, 단위, 기준좌표계 및 출처에 대해서는 후속 도구의 요구조건 충족 여부를 평가하고, 신뢰도와 최신성은 일정 범위의 편차를 허용하여 실행 가능 여부를 판정한다.
 
@@ -364,13 +356,13 @@ OEPVR은 스키마 유형, 의미 유형, 단위, 기준좌표계 및 출처에 
 
 제안방법은 OEPVR 83.2%, TSR 86.7%를 기록하였다. Direct Tool-Planning 대비 OEPVR은 25.2%p, TSR은 16.7%p 증가하였다. MIRROR-inspired 및 Tool-MVR-inspired 대비 OEPVR은 16.7%p, TSR은 16.7%p 증가하였다. Direct Tool-Planning은 도구의 입·출력 정보를 이용해 실행계획을 구성하므로 스키마가 연결된 이후에도 단위, 기준좌표계, 최신성, 신뢰도 및 출처의 불일치가 남을 수 있다. MIRROR-inspired와 Tool-MVR-inspired는 실행계획에서 확인 가능한 스키마와 의존관계 오류를 검토하지만 본 실험에서 정의한 실행조건별 결손도를 보완 판단에 사용하지 않는다. 제안방법은 전달 데이터와 후속 도구의 실행조건을 의존관계별로 비교하고 위험도가 임계값을 초과한 경우 실행 전에 보완하므로 스키마 연결 이후에 남아 있는 실행조건 위반을 줄일 수 있었다. 실행조건을 이용한 실행 전 검증과 보완의 차이가 OEPVR과 TSR의 결과 차이에 반영되었다.
 
-**[그림 5 삽입]**  
+**[그림 4 삽입]**  
 `results/v4_1_external_baselines/figures/fig_external_validity_comparison.pdf`
 
-**그림 5. 비교 기법 대비 SCCR, OEPVR 및 TSR**  
-**Fig. 5. SCCR, OEPVR, and TSR compared with external baselines**
+**그림 4. 비교 기법 대비 SCCR, OEPVR 및 TSR**  
+**Fig. 4. SCCR, OEPVR, and TSR compared with external baselines**
 
-그림 5에서 제안방법은 비교 기법보다 높은 OEPVR과 TSR을 기록하였다. Direct Tool-Planning의 스키마 연결성은 83.3%였으나 SCCR은 53.3%, OEPVR은 58.0%였다. 입·출력 필드와 자료형이 호환되더라도 단위, 기준좌표계, 최신성, 신뢰도 및 출처까지 충족되는 것은 아니므로 스키마 연결성과 실행조건 충족률 사이에 차이가 발생하였다. 특히 단위, 기준좌표계 및 출처는 데이터 형식이 동일한 상태에서도 후속 도구의 요구조건과 다른 값을 가질 수 있으므로 스키마 연결성만으로 판정하기 어렵다. 스키마 연결성보다 SCCR과 OEPVR이 낮게 나타난 결과는 스키마 수준의 호환성과 실행조건 충족 및 운용 유효성이 서로 다른 평가 대상임을 보여준다.
+그림 4에서 제안방법은 비교 기법보다 높은 OEPVR과 TSR을 기록하였다. Direct Tool-Planning의 스키마 연결성은 83.3%였으나 SCCR은 53.3%, OEPVR은 58.0%였다. 입·출력 필드와 자료형이 호환되더라도 단위, 기준좌표계, 최신성, 신뢰도 및 출처까지 충족되는 것은 아니므로 스키마 연결성과 실행조건 충족률 사이에 차이가 발생하였다. 특히 단위, 기준좌표계 및 출처는 데이터 형식이 동일한 상태에서도 후속 도구의 요구조건과 다른 값을 가질 수 있으므로 스키마 연결성만으로 판정하기 어렵다. 스키마 연결성보다 SCCR과 OEPVR이 낮게 나타난 결과는 스키마 수준의 호환성과 실행조건 충족 및 운용 유효성이 서로 다른 평가 대상임을 보여준다.
 
 위반 유형별 분석에서는 기준좌표계, 단위, 출처 및 복합 위반에서 차이가 크게 나타났다. 기준좌표계 위반에서 Direct Tool-Planning의 OEPVR과 TSR은 각각 29.9%, 43.7%였고 제안방법은 80.5%, 70.1%를 기록하였다. 단위 위반의 OEPVR은 Direct 30.0%, 제안방법 87.8%였고 제안방법의 TSR은 82.2%였다. 출처 위반에서는 Direct의 OEPVR과 TSR이 각각 37.8%, 57.8%였고 제안방법은 91.1%, 82.2%를 기록하였다. 기준좌표계, 단위 및 출처 위반은 데이터의 필드 구조가 유지된 상태에서도 발생할 수 있다. 제안방법은 해당 조건을 독립적인 실행조건으로 평가하고 조건에 맞는 변환, 갱신 또는 검증 기능을 보완 후보로 구성하므로 Direct Tool-Planning보다 높은 OEPVR을 기록하였다.
 
@@ -386,15 +378,15 @@ MIRROR-inspired는 실행 전 수정을 시나리오당 평균 0.333회 수행�
 
 Tool-MVR-inspired의 평균 전체 지연시간은 MIRROR-inspired보다 276.8 ms 높았고 평균 호출 수는 0.667회 많았다. 두 기법의 TSR이 동일한 상태에서 실행비용에 차이가 발생한 결과는 실행 후 수정·재실행 과정에서 추가 호출과 지연시간이 발생했기 때문이다. 같은 수준의 실행 유효성 결과에서도 보완 시점과 재실행 여부에 따라 실행비용이 달라질 수 있음을 확인하였다.
 
-제안방법의 전체 지연시간은 1541.7 ms로 MIRROR-inspired의 1542.0 ms와 유사하였다. 제안방법의 평균 호출 수는 7.366으로 MIRROR-inspired의 6.500보다 높았다. 도구별 실행시간이 동일하지 않고 제안방법은 복수의 보완 후보 중 잔여 위험도와 실행비용을 함께 비교하여 후보를 선택하므로 추가 호출 수의 증가가 전체 지연시간 증가와 같은 비율로 이어지지 않았다. Tool-MVR-inspired와 비교하면 제안방법의 전체 지연시간은 277.1 ms 낮았고 평균 호출 수는 약 0.199 높았다. 제안방법은 실행 전에 실행조건을 검증하고 필요한 보완을 수행하므로 Tool-MVR-inspired의 실패 실행과 재실행에 해당하는 비용이 발생하지 않는다. 비교 기법과 제안방법의 평균 지연시간 및 도구 호출 수는 그림 6에 나타내었다.
+제안방법의 전체 지연시간은 1541.7 ms로 MIRROR-inspired의 1542.0 ms와 유사하였다. 제안방법의 평균 호출 수는 7.366으로 MIRROR-inspired의 6.500보다 높았다. 도구별 실행시간이 동일하지 않고 제안방법은 복수의 보완 후보 중 잔여 위험도와 실행비용을 함께 비교하여 후보를 선택하므로 추가 호출 수의 증가가 전체 지연시간 증가와 같은 비율로 이어지지 않았다. Tool-MVR-inspired와 비교하면 제안방법의 전체 지연시간은 277.1 ms 낮았고 평균 호출 수는 약 0.199 높았다. 제안방법은 실행 전에 실행조건을 검증하고 필요한 보완을 수행하므로 Tool-MVR-inspired의 실패 실행과 재실행에 해당하는 비용이 발생하지 않는다. 비교 기법과 제안방법의 평균 지연시간 및 도구 호출 수는 그림 5에 나타내었다.
 
-**[그림 6 삽입]**  
+**[그림 5 삽입]**  
 `results/v4_1_external_baselines/figures/fig_external_efficiency_comparison.pdf`
 
-**그림 6. 비교 기법과 제안방법의 실행비용 비교**  
-**Fig. 6. Execution-cost comparison with external baselines**
+**그림 5. 비교 기법과 제안방법의 실행비용 비교**  
+**Fig. 5. Execution-cost comparison with external baselines**
 
-그림 6에서 Direct Tool-Planning은 가장 낮은 지연시간과 호출 수를 기록하였고 MIRROR-inspired는 제안방법보다 적은 호출 수를 기록하였다. Direct Tool-Planning은 별도의 검토와 보완을 수행하지 않으므로 실행비용이 가장 낮았지만 OEPVR과 TSR도 제안방법보다 낮게 나타났다. 제안방법은 MIRROR-inspired보다 많은 호출을 사용했지만 전체 지연시간은 유사하였고, Tool-MVR-inspired보다 전체 지연시간이 277.1 ms 낮았다. 결과를 종합하면 실행 유효성 향상에 필요한 보완 방식과 보완 시점이 실행비용에 서로 다른 영향을 미친다.
+그림 5에서 Direct Tool-Planning은 가장 낮은 지연시간과 호출 수를 기록하였고 MIRROR-inspired는 제안방법보다 적은 호출 수를 기록하였다. Direct Tool-Planning은 별도의 검토와 보완을 수행하지 않으므로 실행비용이 가장 낮았지만 OEPVR과 TSR도 제안방법보다 낮게 나타났다. 제안방법은 MIRROR-inspired보다 많은 호출을 사용했지만 전체 지연시간은 유사하였고, Tool-MVR-inspired보다 전체 지연시간이 277.1 ms 낮았다. 결과를 종합하면 실행 유효성 향상에 필요한 보완 방식과 보완 시점이 실행비용에 서로 다른 영향을 미친다.
 
 ## 4. 선택적 보완 및 비용 기반 후보 선택 분석
 
@@ -402,15 +394,15 @@ Strict와 제안방법은 OEPVR 83.2%, TSR 86.7%로 동일하였다. SCCR은 Str
 
 유효성 전이 분석에서 제안방법의 900개 시나리오 중 54개는 `SCCR=0`이면서 `OEPV=1`이었다. 해당 54개 시나리오가 제안방법과 Strict의 SCCR 6.0%p 차이를 구성하였다. 해당 시나리오에서는 실행조건 편차가 남아 있었지만 평가 모듈에서 실행 가능한 범위로 판정되었으며, 해당 차이가 OEPVR 또는 TSR 감소로 이어지지 않았다. 실행조건 편차의 존재 여부만으로 보완을 결정하지 않고 편차의 위험도를 함께 고려한 결과가 선택적 보완과 Strict 사이의 차이를 만들었다.
 
-보완 행동을 비교하면 Strict의 보완 수행률은 100%였고 제안방법은 47.3%였다. 제안방법의 보완 정밀도는 35.2%로 Strict의 16.7%보다 높았고, 보완 F1은 52.1%로 Strict의 28.6%보다 높았다. 불필요 보완률(OURR)은 55.8%에서 50.2%로 5.6%p 감소하였다. Strict 방식은 실행조건 편차가 존재하는 시나리오 전반에 보완을 적용하므로 최종 수행 결과에 영향을 주지 않는 편차에도 보완이 포함된다. 제안방법은 위험도 임계값을 이용해 보완 대상을 제한하므로 보완 수행률이 낮아졌고, 동일한 OEPVR과 TSR을 유지한 상태에서 보완 정밀도와 F1이 높게 나타났다. 평균 추가 지연시간은 53.7 ms에서 43.7 ms로 10.0 ms 감소하였고 평균 추가 호출 수는 0.533에서 0.473으로 감소하였다. Strict와 제안방법의 보완 수행 결과와 실행비용 차이는 그림 7에 나타내었다.
+보완 행동을 비교하면 Strict의 보완 수행률은 100%였고 제안방법은 47.3%였다. 제안방법의 보완 정밀도는 35.2%로 Strict의 16.7%보다 높았고, 보완 F1은 52.1%로 Strict의 28.6%보다 높았다. 불필요 보완률(OURR)은 55.8%에서 50.2%로 5.6%p 감소하였다. Strict 방식은 실행조건 편차가 존재하는 시나리오 전반에 보완을 적용하므로 최종 수행 결과에 영향을 주지 않는 편차에도 보완이 포함된다. 제안방법은 위험도 임계값을 이용해 보완 대상을 제한하므로 보완 수행률이 낮아졌고, 동일한 OEPVR과 TSR을 유지한 상태에서 보완 정밀도와 F1이 높게 나타났다. 평균 추가 지연시간은 53.7 ms에서 43.7 ms로 10.0 ms 감소하였고 평균 추가 호출 수는 0.533에서 0.473으로 감소하였다. Strict와 제안방법의 보완 수행 결과와 실행비용 차이는 그림 6에 나타내었다.
 
-**[그림 7 삽입]**  
+**[그림 6 삽입]**  
 `results/v4_1_external_baselines/figures/fig_repair_efficiency.pdf`
 
-**그림 7. Strict 방식 대비 제안방법의 보완 효율성**  
-**Fig. 7. Repair efficiency of the proposed method compared with strict all-repair**
+**그림 6. Strict 방식 대비 제안방법의 보완 효율성**  
+**Fig. 6. Repair efficiency of the proposed method compared with strict all-repair**
 
-그림 7은 제안방법이 Strict와 동일한 OEPVR 및 TSR을 유지하면서 보완 수행률과 추가 지연시간을 감소시킨 결과를 나타낸다. 보완 필요성을 실행조건의 존재 여부만으로 결정하는 대신 위험도 임계값을 이용함으로써 운용 결과에 영향을 주지 않는 편차에 대한 보완을 줄일 수 있었다.
+그림 6은 제안방법이 Strict와 동일한 OEPVR 및 TSR을 유지하면서 보완 수행률과 추가 지연시간을 감소시킨 결과를 나타낸다. 보완 필요성을 실행조건의 존재 여부만으로 결정하는 대신 위험도 임계값을 이용함으로써 운용 결과에 영향을 주지 않는 편차에 대한 보완을 줄일 수 있었다.
 
 위반 심각도별 분석에서도 보완 행동의 차이가 확인되었다. 심각 위반에서 Strict와 제안방법의 TSR은 모두 55.6%였다. 제안방법의 보완 정밀도는 약 70.8%, 보완 F1은 82.9%, 보완 수행률은 78.5%였다. Strict의 보완 수행률은 100%였다. 제안방법은 정상, 경미 및 심각이라는 시나리오 분류 자체를 보완 판단에 사용하지 않고 실행조건 결손도로부터 계산된 위험도를 사용한다. 심각 위반은 최종 수행에 영향을 줄 수 있도록 큰 조건 편차를 포함하므로 해당 편차가 상대적으로 높은 위험도로 반영되어 보완 수행률도 높게 나타났다.
 
@@ -474,12 +466,11 @@ Strict 방식과의 비교에서 두 방식은 OEPVR 83.2%, TSR 86.7%로 동일�
 | 번호 | 권장 위치 | 파일 |
 |---|---|---|
 | Fig. 1 | III-1 실행조건 모델 및 위험도 산정 | `results/paper_figures/fig_proposed_architecture.pdf` |
-| Fig. 2 | III-2 선택적 보완 | `results/paper_figures/fig_selective_repair_example.pdf` |
-| Fig. 3 | IV-1 평가 기준 | `results/paper_figures/fig_correction_timing_concept.pdf` |
-| Fig. 4 | IV-1 실험평가 | `results/paper_figures/fig_experimental_pipeline.pdf` |
-| Fig. 5 | IV-2 실행 유효성 비교 | `results/v4_1_external_baselines/figures/fig_external_validity_comparison.pdf` |
-| Fig. 6 | IV-3 실행비용 분석 | `results/v4_1_external_baselines/figures/fig_external_efficiency_comparison.pdf` |
-| Fig. 7 | IV-4 선택적 보완 | `results/v4_1_external_baselines/figures/fig_repair_efficiency.pdf` |
+| Fig. 2 | IV-1 평가 기준 | `results/paper_figures/fig_correction_timing_concept.pdf` |
+| Fig. 3 | IV-1 실험평가 | `results/paper_figures/fig_experimental_pipeline.pdf` |
+| Fig. 4 | IV-2 실행 유효성 비교 | `results/v4_1_external_baselines/figures/fig_external_validity_comparison.pdf` |
+| Fig. 5 | IV-3 실행비용 분석 | `results/v4_1_external_baselines/figures/fig_external_efficiency_comparison.pdf` |
+| Fig. 6 | IV-4 선택적 보완 | `results/v4_1_external_baselines/figures/fig_repair_efficiency.pdf` |
 | Table 4 | IV-2 메인 비교 | `results/v4_1_external_baselines/summary/paper_table_external_main.csv` |
 | Table 5 | IV-4 비용 기반 후보 선택 | `results/v4_1_external_baselines/summary/paper_table_ablation.csv` |
 | 위반 유형별 분석 | IV-2 | `results/v4_1_external_baselines/summary/by_violation_type.csv` |
