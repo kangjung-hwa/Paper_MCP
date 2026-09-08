@@ -1,106 +1,107 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid meet">
+<svg xmlns="http://www.w3.org/2000/svg" width="1660" height="780" viewBox="-30 -30 1660 780" preserveAspectRatio="xMidYMid meet" style="background:#ffffff;overflow:visible">
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L9,3 z" fill="#1f2937"/>
     </marker>
     <style>
-      .panel{stroke-width:2.2;fill:#fff}
-      .box{fill:#fff;stroke:#334155;stroke-width:1.9}
-      .dash{fill:#fff;stroke:#94a3b8;stroke-width:1.6;stroke-dasharray:7 6}
-      .num{font:700 30px 'Times New Roman',serif;fill:#fff;text-anchor:middle}
-      .head{font:700 31px 'Times New Roman',serif;fill:#0f172a;text-anchor:middle}
-      .main{font:400 25px 'Times New Roman',serif;fill:#111827;text-anchor:middle}
-      .small{font:400 20px 'Times New Roman',serif;fill:#111827;text-anchor:middle}
-      .math{font:italic 26px 'Times New Roman',serif;fill:#111827;text-anchor:middle}
+      .panel{stroke-width:2.2;rx:14;ry:14}
+      .box{fill:#ffffff;stroke:#334155;stroke-width:1.8;rx:9;ry:9}
+      .num{font:700 28px 'Times New Roman',serif;fill:#ffffff}
+      .head{font:700 29px 'Times New Roman',serif;fill:#0f172a}
+      .main{font:400 24px 'Times New Roman',serif;fill:#111827}
+      .small{font:400 19px 'Times New Roman',serif;fill:#111827}
+      .math{font:italic 24px 'Times New Roman',serif;fill:#111827}
       .line{stroke:#1f2937;stroke-width:2.8;fill:none;marker-end:url(#arrow)}
-      .thin{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .thin{stroke:#475569;stroke-width:1.8;fill:none;marker-end:url(#arrow)}
+      .dash{fill:#ffffff;stroke:#94a3b8;stroke-width:1.5;stroke-dasharray:7 6;rx:7;ry:7}
     </style>
   </defs>
 
-  <rect x="0" y="0" width="1600" height="700" fill="#ffffff"/>
-
   <!-- Inputs -->
-  <rect x="35" y="210" width="145" height="90" class="box"/>
-  <text x="107" y="247" class="main"><tspan x="107">User</tspan><tspan x="107" dy="30">Request</tspan></text>
-  <rect x="35" y="350" width="145" height="90" class="box"/>
-  <text x="107" y="387" class="main"><tspan x="107">Tool</tspan><tspan x="107" dy="30">Registry</tspan></text>
+  <rect x="25" y="235" width="145" height="90" class="box"/>
+  <text x="97" y="273" text-anchor="middle" class="main">User</text>
+  <text x="97" y="303" text-anchor="middle" class="main">Request</text>
+  <rect x="25" y="370" width="145" height="90" class="box"/>
+  <text x="97" y="408" text-anchor="middle" class="main">Tool</text>
+  <text x="97" y="438" text-anchor="middle" class="main">Registry</text>
 
   <!-- Stage 1 -->
-  <rect x="220" y="145" width="300" height="360" fill="#eef5fb" stroke="#5f7893" class="panel"/>
-  <circle cx="370" cy="145" r="30" fill="#506f90"/>
-  <text x="370" y="155" class="num">1</text>
-  <text x="370" y="195" class="head">Plan Generation</text>
-  <rect x="255" y="245" width="230" height="90" class="box"/>
-  <text x="370" y="300" class="main">Tool Selection</text>
-  <rect x="255" y="370" width="230" height="100" class="box"/>
-  <text x="370" y="410" class="main"><tspan x="370">Dependency</tspan><tspan x="370" dy="31">Construction</tspan></text>
+  <rect x="205" y="165" width="315" height="365" class="panel" fill="#eef5fb" stroke="#5f7893"/>
+  <circle cx="362" cy="150" r="31" fill="#506f90"/>
+  <text x="362" y="159" text-anchor="middle" class="num">1</text>
+  <text x="362" y="208" text-anchor="middle" class="head">Plan Generation</text>
+  <rect x="242" y="255" width="240" height="88" class="box"/>
+  <text x="362" y="308" text-anchor="middle" class="main">Tool Selection</text>
+  <rect x="242" y="382" width="240" height="100" class="box"/>
+  <text x="362" y="424" text-anchor="middle" class="main">Dependency</text>
+  <text x="362" y="455" text-anchor="middle" class="main">Construction</text>
 
   <!-- Initial plan -->
-  <rect x="555" y="260" width="145" height="135" class="box"/>
-  <text x="627" y="304" class="main"><tspan x="627">Initial</tspan><tspan x="627" dy="30">Plan</tspan></text>
-  <text x="627" y="375" class="math">W</text>
+  <rect x="555" y="280" width="150" height="130" class="box"/>
+  <text x="630" y="322" text-anchor="middle" class="main">Initial</text>
+  <text x="630" y="353" text-anchor="middle" class="main">Plan</text>
+  <text x="630" y="389" text-anchor="middle" class="math">W</text>
 
   <!-- Stage 2 -->
-  <rect x="745" y="105" width="455" height="430" fill="#fbf6ec" stroke="#a58a5d" class="panel"/>
-  <circle cx="972" cy="105" r="30" fill="#a17c3f"/>
-  <text x="972" y="115" class="num">2</text>
-  <text x="972" y="155" class="head">Risk Assessment</text>
+  <rect x="745" y="120" width="420" height="455" class="panel" fill="#fbf6ec" stroke="#a58a5d"/>
+  <circle cx="955" cy="105" r="31" fill="#a17c3f"/>
+  <text x="955" y="114" text-anchor="middle" class="num">2</text>
+  <text x="955" y="163" text-anchor="middle" class="head">Risk Assessment</text>
 
-  <rect x="780" y="205" width="385" height="170" class="box"/>
-  <text x="972" y="242" class="main">Execution Conditions Check</text>
-  <rect x="800" y="265" width="345" height="90" class="dash"/>
-  <text x="972" y="291" class="small">
-    <tspan x="972">Schema Type · Semantic Type · Unit</tspan>
-    <tspan x="972" dy="26">Reference Frame · Freshness</tspan>
-    <tspan x="972" dy="26">Confidence · Provenance</tspan>
-  </text>
+  <rect x="785" y="205" width="340" height="155" class="box"/>
+  <text x="955" y="240" text-anchor="middle" class="main">Execution Conditions Check</text>
+  <rect x="805" y="265" width="300" height="75" class="dash"/>
+  <text x="955" y="292" text-anchor="middle" class="small">Schema Type · Semantic Type · Unit</text>
+  <text x="955" y="321" text-anchor="middle" class="small">Reference Frame · Freshness · Confidence · Provenance</text>
 
-  <rect x="780" y="405" width="385" height="95" class="box"/>
-  <text x="972" y="441" class="main">Risk Estimation</text>
-  <text x="972" y="480" class="math">Dᵢⱼ, Rᵢⱼ, R(W)</text>
+  <rect x="785" y="400" width="340" height="105" class="box"/>
+  <text x="955" y="438" text-anchor="middle" class="main">Risk Estimation</text>
+  <text x="955" y="478" text-anchor="middle" class="math">Dᵢⱼ, Rᵢⱼ, R(W)</text>
 
   <!-- Decision -->
-  <polygon points="1310,235 1390,315 1310,395 1230,315" fill="#f8fafc" stroke="#475569" stroke-width="2.2"/>
-  <text x="1310" y="309" class="math">R(W) &gt; θ</text>
-  <text x="1310" y="344" class="main">?</text>
-
-  <!-- Final plan -->
-  <rect x="1430" y="245" width="145" height="140" class="box"/>
-  <text x="1502" y="295" class="main">Final Plan</text>
-  <text x="1502" y="340" class="math">W or W⊕r*</text>
+  <polygon points="1260,265 1340,345 1260,425 1180,345" fill="#f8fafc" stroke="#475569" stroke-width="2.2"/>
+  <text x="1260" y="338" text-anchor="middle" class="math">R(W) &gt; θ</text>
+  <text x="1260" y="371" text-anchor="middle" class="main">?</text>
 
   <!-- Stage 3 -->
-  <rect x="930" y="555" width="610" height="125" fill="#fbf0f2" stroke="#a66d78" class="panel"/>
-  <circle cx="1235" cy="555" r="30" fill="#9a5f69"/>
-  <text x="1235" y="565" class="num">3</text>
-  <text x="1235" y="602" class="head">Selective Repair</text>
+  <rect x="1090" y="505" width="430" height="170" class="panel" fill="#fbf0f2" stroke="#a66d78"/>
+  <circle cx="1305" cy="490" r="31" fill="#9a5f69"/>
+  <text x="1305" y="499" text-anchor="middle" class="num">3</text>
+  <text x="1305" y="548" text-anchor="middle" class="head">Selective Repair</text>
+  <rect x="1120" y="575" width="125" height="70" class="box"/>
+  <text x="1182" y="603" text-anchor="middle" class="small">Candidate</text>
+  <text x="1182" y="628" text-anchor="middle" class="small">Generation</text>
+  <rect x="1260" y="575" width="125" height="70" class="box"/>
+  <text x="1322" y="603" text-anchor="middle" class="small">Residual Risk</text>
+  <text x="1322" y="628" text-anchor="middle" class="small">+ Cost</text>
+  <rect x="1400" y="575" width="90" height="70" class="box"/>
+  <text x="1445" y="603" text-anchor="middle" class="small">Select</text>
+  <text x="1445" y="630" text-anchor="middle" class="math">r*</text>
 
-  <rect x="960" y="620" width="165" height="48" class="box"/>
-  <text x="1042" y="639" class="small"><tspan x="1042">Candidate</tspan><tspan x="1042" dy="22">Generation</tspan></text>
-  <rect x="1145" y="620" width="180" height="48" class="box"/>
-  <text x="1235" y="639" class="small"><tspan x="1235">Residual Risk</tspan><tspan x="1235" dy="22">+ Cost</tspan></text>
-  <rect x="1345" y="620" width="165" height="48" class="box"/>
-  <text x="1427" y="639" class="small"><tspan x="1427">Select</tspan><tspan x="1427" dy="22">r*</tspan></text>
+  <!-- Final plan -->
+  <rect x="1410" y="260" width="165" height="125" class="box"/>
+  <text x="1492" y="307" text-anchor="middle" class="main">Final Plan</text>
+  <text x="1492" y="345" text-anchor="middle" class="math">W or W⊕r*</text>
 
   <!-- Main flow -->
-  <line x1="180" y1="255" x2="220" y2="255" class="line"/>
-  <line x1="180" y1="395" x2="220" y2="395" class="line"/>
-  <line x1="485" y1="290" x2="555" y2="300" class="line"/>
-  <line x1="485" y1="420" x2="555" y2="355" class="line"/>
-  <line x1="700" y1="327" x2="745" y2="327" class="line"/>
-  <line x1="1200" y1="315" x2="1230" y2="315" class="line"/>
+  <line x1="170" y1="280" x2="205" y2="280" class="line"/>
+  <line x1="170" y1="415" x2="205" y2="415" class="line"/>
+  <line x1="482" y1="299" x2="555" y2="322" class="line"/>
+  <line x1="482" y1="432" x2="555" y2="370" class="line"/>
+  <line x1="705" y1="345" x2="745" y2="345" class="line"/>
+  <line x1="1165" y1="345" x2="1180" y2="345" class="line"/>
 
   <!-- Decision branches -->
-  <line x1="1390" y1="315" x2="1430" y2="315" class="line"/>
-  <text x="1410" y="290" class="small">No</text>
-  <path d="M1310 395 L1310 555" class="line"/>
-  <text x="1336" y="475" class="small">Yes</text>
+  <line x1="1340" y1="345" x2="1410" y2="322" class="line"/>
+  <text x="1370" y="322" class="small">No</text>
+  <path d="M1260 425 L1260 505" class="line"/>
+  <text x="1280" y="470" class="small">Yes</text>
 
   <!-- Repair internal flow -->
-  <line x1="1125" y1="644" x2="1145" y2="644" class="thin"/>
-  <line x1="1325" y1="644" x2="1345" y2="644" class="thin"/>
+  <line x1="1245" y1="610" x2="1260" y2="610" class="thin"/>
+  <line x1="1385" y1="610" x2="1400" y2="610" class="thin"/>
 
   <!-- Re-check loop -->
-  <path d="M1427 620 L1427 590 L900 590 L900 500" class="line"/>
-  <text x="1160" y="580" class="small">Re-check</text>
+  <path d="M1445 575 L1445 555 L1060 555 L1060 520 L955 520 L955 505" class="line"/>
+  <text x="1185" y="543" text-anchor="middle" class="small">Re-check</text>
 </svg>
