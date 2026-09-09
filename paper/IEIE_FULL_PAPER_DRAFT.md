@@ -314,7 +314,7 @@ Algorithm 1은 초기 실행계획의 도구 간 의존관계를 순차적으로
 
 MIRROR와 Tool-MVR은 본 연구와 입력 및 실행 구조가 다르므로 각 연구의 핵심 오류 검토 및 수정 절차를 MCP 기반 실행계획 환경에 맞게 구성하였다. 이에 따라 각각 MIRROR-inspired와 Tool-MVR-inspired로 표기하였다. MIRROR-inspired는 MIRROR[4]의 실행 전 자기검토 개념을 적용하여 실행계획과 도구 정보에서 확인 가능한 데이터, 스키마, 의미적 의존관계, 목표 경로, 중복 도구 및 도구 순서를 검토하고 의존관계 오류를 수정한다. Tool-MVR-inspired는 Tool-MVR[5]의 Error–Reflection–Correction 구조를 적용하여 초기 실행계획을 실행한 뒤 관측 가능한 오류가 발생한 시나리오에서 자기검토, 수정 및 재실행을 수행한다.
 
-Strict 방식은 모든 필수 실행조건 위반에 보완을 적용하는 설정으로 구성하였으며, 제안방법의 선택적 보완 효과를 분석하기 위한 기준으로 사용하였다. 비교 기법과 제안방법의 보완 시점은 그림 2에 나타내었다.
+MIRROR-inspired, Tool-MVR-inspired 및 제안방법의 보완 시점은 그림 2에 나타내었다.
 
 **[그림 2 삽입]**  
 `results/paper_figures/fig_correction_timing_concept.pdf`
@@ -322,7 +322,9 @@ Strict 방식은 모든 필수 실행조건 위반에 보완을 적용하는 설
 **그림 2. 기법별 보완 시점**  
 **Fig. 2. Correction timing of the compared methods**
 
-그림 2는 실행 전 검토를 수행하는 MIRROR-inspired, 실행 후 수정·재실행을 수행하는 Tool-MVR-inspired, 실행조건 검증 후 보완을 수행하는 제안방법의 처리 시점을 구분한다.
+그림 2는 실행 전 검토를 수행하는 MIRROR-inspired, 실행 후 수정·재실행을 수행하는 Tool-MVR-inspired, 실행조건 검증 후 선택적 보완을 수행하는 제안방법의 처리 시점을 구분한다.
+
+선택적 보완 효과를 분석하기 위해 모든 필수 실행조건 위반에 보완을 적용하는 Strict 방식을 추가 기준으로 구성하였다. Strict 방식은 실행 전 단계에서 실행조건 편차의 위험도와 관계없이 보완을 수행한다.
 
 모든 기법은 동일한 평가 시나리오와 도구 정보를 이용하여 실행계획을 생성하였다. 제안방법의 영향을 동일한 조건에서 비교하기 위해 각 기법에 동일한 초기 실행계획을 적용하였다.
 
