@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="black"/></marker></defs>
+<style>text{font-family:Arial,'Noto Sans KR',sans-serif;fill:black}.t{font-size:25px;font-weight:bold}.s{font-size:18px}.n{font-size:16px}.b{fill:white;stroke:black;stroke-width:2}.d{fill:white;stroke:black;stroke-width:2;stroke-dasharray:7 5}.l{stroke:black;stroke-width:2;fill:none;marker-end:url(#a)}</style>
+<text x="700" y="38" text-anchor="middle" class="t">도 3. 실행조건 결손도 및 위험도 산정 구조</text>
+<rect x="70" y="105" width="250" height="120" rx="8" class="b"/><text x="195" y="140" text-anchor="middle" class="s">선행 도구 출력</text><text x="195" y="170" text-anchor="middle" class="n">실제 조건정보 (131)</text><text x="195" y="198" text-anchor="middle" class="n">c_act(i,j,k)</text>
+<rect x="70" y="300" width="250" height="120" rx="8" class="b"/><text x="195" y="335" text-anchor="middle" class="s">후속 도구 입력 요구</text><text x="195" y="365" text-anchor="middle" class="n">요구 조건정보 (132)</text><text x="195" y="393" text-anchor="middle" class="n">c_req(i,j,k)</text>
+<rect x="410" y="155" width="280" height="220" rx="8" class="b"/><text x="550" y="190" text-anchor="middle" class="s">실행조건 평가부 (150)</text><text x="550" y="225" text-anchor="middle" class="n">τ 스키마 유형</text><text x="550" y="250" text-anchor="middle" class="n">s 의미 유형 / u 단위</text><text x="550" y="275" text-anchor="middle" class="n">r 기준좌표계 / t 최신성</text><text x="550" y="300" text-anchor="middle" class="n">q 신뢰도 / p 출처</text><text x="550" y="340" text-anchor="middle" class="n">조건별 실제값 ↔ 요구값 비교</text>
+<path d="M320 165 H410" class="l"/><path d="M320 360 H365 V315 H410" class="l"/>
+<rect x="790" y="155" width="280" height="220" rx="8" class="b"/><text x="930" y="190" text-anchor="middle" class="s">결손도 산출 (151)</text><text x="930" y="225" text-anchor="middle" class="n">범주형: 일치 0 / 불일치 1</text><text x="930" y="255" text-anchor="middle" class="n">연속형: 위반 크기 정규화</text><text x="930" y="300" text-anchor="middle" class="n">D(i,j) = [d1, d2, …, dm]</text><text x="930" y="337" text-anchor="middle" class="n">0 ≤ d(i,j,k) ≤ 1</text>
+<path d="M690 265 H790" class="l"/>
+<rect x="1110" y="155" width="230" height="220" rx="8" class="b"/><text x="1225" y="190" text-anchor="middle" class="s">의존관계 위험도</text><text x="1225" y="220" text-anchor="middle" class="n">(161)</text><text x="1225" y="275" text-anchor="middle" class="n">R(i,j) = Σ w(k)d(k)</text><text x="1225" y="325" text-anchor="middle" class="n">조건별 가중치 적용</text>
+<path d="M1070 265 H1110" class="l"/>
+<rect x="430" y="510" width="540" height="110" rx="8" class="d"/><text x="700" y="548" text-anchor="middle" class="s">실행계획 W의 복수 의존관계 위험도</text><text x="700" y="583" text-anchor="middle" class="n">R(1,2), R(2,3), R(1,4), …</text>
+<path d="M1225 375 V465 H700 V510" class="l"/>
+<rect x="510" y="675" width="380" height="95" rx="8" class="b"/><text x="700" y="712" text-anchor="middle" class="s">실행계획 위험도 (162)</text><text x="700" y="745" text-anchor="middle" class="n">R(W) = max R(i,j)  (실시예)</text>
+<path d="M700 620 V675" class="l"/>
+<text x="1060" y="585" class="n">다른 실시예:</text><text x="1060" y="612" class="n">가중합 / 평균 / 분위수</text><text x="1060" y="639" class="n">또는 이들의 조합</text>
+</svg>
