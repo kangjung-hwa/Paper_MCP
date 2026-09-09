@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="black"/></marker></defs>
+<style>text{font-family:Arial,'Noto Sans KR',sans-serif;fill:black}.t{font-size:24px;font-weight:bold}.s{font-size:19px}.n{font-size:17px}.b{fill:white;stroke:black;stroke-width:2}.d{fill:white;stroke:black;stroke-width:2;stroke-dasharray:8 6}.l{stroke:black;stroke-width:2;fill:none;marker-end:url(#a)}</style>
+<text x="600" y="42" text-anchor="middle" class="t">도 1. 종래 다중 도구 실행계획 처리 구조</text>
+<rect x="40" y="110" width="180" height="82" rx="8" class="b"/><text x="130" y="145" text-anchor="middle" class="s">사용자 요청</text><text x="130" y="173" text-anchor="middle" class="n">(10)</text>
+<rect x="275" y="95" width="220" height="112" rx="8" class="b"/><text x="385" y="137" text-anchor="middle" class="s">LLM/계획 생성기</text><text x="385" y="168" text-anchor="middle" class="n">도구 선택·순서 결정 (20)</text>
+<rect x="550" y="95" width="220" height="112" rx="8" class="b"/><text x="660" y="137" text-anchor="middle" class="s">도구 레지스트리</text><text x="660" y="168" text-anchor="middle" class="n">입·출력 스키마 (30)</text>
+<path d="M220 151 H275" class="l"/><path d="M550 151 H495" class="l"/>
+<rect x="90" y="300" width="220" height="95" rx="8" class="b"/><text x="200" y="337" text-anchor="middle" class="s">선행 도구 T1</text><text x="200" y="367" text-anchor="middle" class="n">출력 데이터 (40)</text>
+<rect x="490" y="300" width="220" height="95" rx="8" class="b"/><text x="600" y="337" text-anchor="middle" class="s">후속 도구 T2</text><text x="600" y="367" text-anchor="middle" class="n">입력 데이터 (50)</text>
+<rect x="890" y="300" width="220" height="95" rx="8" class="b"/><text x="1000" y="337" text-anchor="middle" class="s">후속 도구 T3</text><text x="1000" y="367" text-anchor="middle" class="n">최종 처리 (60)</text>
+<path d="M385 207 V255 H200 V300" class="l"/><path d="M310 347 H490" class="l"/><path d="M710 347 H890" class="l"/>
+<text x="400" y="327" text-anchor="middle" class="n">스키마 연결</text><text x="800" y="327" text-anchor="middle" class="n">스키마 연결</text>
+<rect x="330" y="450" width="540" height="125" rx="8" class="d"/><text x="600" y="486" text-anchor="middle" class="s">종래 구조에서 누락될 수 있는 실행조건</text><text x="600" y="522" text-anchor="middle" class="n">단위 · 기준좌표계 · 최신성 · 신뢰도 · 출처 · 의미 유형</text><text x="600" y="552" text-anchor="middle" class="n">→ 스키마가 연결되어도 실제 운용 유효성이 보장되지 않음</text>
+<rect x="455" y="620" width="290" height="60" rx="8" class="b"/><text x="600" y="657" text-anchor="middle" class="s">실행 후 오류/재실행 (70)</text><path d="M1000 395 V650 H745" class="l"/>
+</svg>
