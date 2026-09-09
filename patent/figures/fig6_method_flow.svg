@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1180" viewBox="0 0 1200 1180">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="black"/></marker></defs>
+<style>text{font-family:Arial,'Noto Sans KR',sans-serif;fill:black}.t{font-size:25px;font-weight:bold}.s{font-size:18px}.n{font-size:16px}.b{fill:white;stroke:black;stroke-width:2}.l{stroke:black;stroke-width:2;fill:none;marker-end:url(#a)}</style>
+<text x="600" y="38" text-anchor="middle" class="t">도 6. 본 발명의 방법 흐름도</text>
+<rect x="410" y="75" width="380" height="72" rx="34" class="b"/><text x="600" y="108" text-anchor="middle" class="s">초기 실행계획 W 수신/생성</text><text x="600" y="132" text-anchor="middle" class="n">S100</text>
+<rect x="410" y="190" width="380" height="72" rx="8" class="b"/><text x="600" y="222" text-anchor="middle" class="s">도구 간 데이터 의존관계 식별</text><text x="600" y="246" text-anchor="middle" class="n">S110</text><path d="M600 147 V190" class="l"/>
+<rect x="410" y="305" width="380" height="80" rx="8" class="b"/><text x="600" y="337" text-anchor="middle" class="s">실제 조건정보 ↔ 요구 조건정보 비교</text><text x="600" y="363" text-anchor="middle" class="n">실행조건별 결손도 산출 S120</text><path d="M600 262 V305" class="l"/>
+<rect x="410" y="430" width="380" height="80" rx="8" class="b"/><text x="600" y="462" text-anchor="middle" class="s">의존관계 위험도 산출</text><text x="600" y="488" text-anchor="middle" class="n">실행계획 위험도 R(W) 산출 S130</text><path d="M600 385 V430" class="l"/>
+<polygon points="600,555 760,620 600,685 440,620" class="b"/><text x="600" y="610" text-anchor="middle" class="s">R(W) &gt; θ ?</text><text x="600" y="637" text-anchor="middle" class="n">S140</text><path d="M600 510 V555" class="l"/>
+<rect x="70" y="585" width="260" height="72" rx="8" class="b"/><text x="200" y="616" text-anchor="middle" class="s">초기 계획 유지</text><text x="200" y="641" text-anchor="middle" class="n">S150</text><path d="M440 620 H330" class="l"/><text x="385" y="608" text-anchor="middle" class="n">아니오</text>
+<rect x="410" y="735" width="380" height="80" rx="8" class="b"/><text x="600" y="767" text-anchor="middle" class="s">위반조건 식별 및 보완 후보 생성</text><text x="600" y="793" text-anchor="middle" class="n">R = {r1,r2,…} S160</text><path d="M600 685 V735" class="l"/><text x="622" y="713" class="n">예</text>
+<rect x="410" y="855" width="380" height="85" rx="8" class="b"/><text x="600" y="886" text-anchor="middle" class="s">후보별 잔여 위험도·실행비용 평가</text><text x="600" y="913" text-anchor="middle" class="n">J(r)=R(W⊕r)+λC(r) S170</text><path d="M600 815 V855" class="l"/>
+<rect x="410" y="985" width="380" height="75" rx="8" class="b"/><text x="600" y="1017" text-anchor="middle" class="s">최적 보완 후보 r* 선택·삽입</text><text x="600" y="1042" text-anchor="middle" class="n">S180</text><path d="M600 940 V985" class="l"/>
+<rect x="835" y="985" width="280" height="75" rx="8" class="b"/><text x="975" y="1017" text-anchor="middle" class="s">수정 계획 재검증</text><text x="975" y="1042" text-anchor="middle" class="n">S190</text><path d="M790 1022 H835" class="l"/>
+<path d="M975 985 V720 H760 V620" class="l"/><text x="1000" y="820" class="n">필요 시 반복</text>
+<rect x="410" y="1100" width="380" height="62" rx="30" class="b"/><text x="600" y="1127" text-anchor="middle" class="s">최종 실행계획 제공/실행</text><text x="600" y="1150" text-anchor="middle" class="n">S200</text>
+<path d="M200 657 V1131 H410" class="l"/><path d="M975 1060 V1080 H600 V1100" class="l"/>
+</svg>
