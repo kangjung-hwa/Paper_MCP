@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="black"/></marker></defs>
+<style>text{font-family:Arial,'Noto Sans KR',sans-serif;fill:black}.t{font-size:25px;font-weight:bold}.s{font-size:18px}.n{font-size:16px}.b{fill:white;stroke:black;stroke-width:2}.d{fill:white;stroke:black;stroke-width:2;stroke-dasharray:7 5}.l{stroke:black;stroke-width:2;fill:none;marker-end:url(#a)}.x{font-size:28px;font-weight:bold}</style>
+<text x="750" y="38" text-anchor="middle" class="t">도 5. 본 발명의 구체적 실시예</text>
+<text x="70" y="88" class="s">(a) 초기 실행계획 및 실행조건 결손</text>
+<rect x="80" y="125" width="240" height="95" rx="8" class="b"/><text x="200" y="160" text-anchor="middle" class="s">GetOwnPosition</text><text x="200" y="188" text-anchor="middle" class="n">WGS84 / m / age 1 s</text>
+<rect x="480" y="125" width="270" height="95" rx="8" class="b"/><text x="615" y="160" text-anchor="middle" class="s">RoutePlanning</text><text x="615" y="188" text-anchor="middle" class="n">요구: ENU / m / age ≤ 5 s</text>
+<rect x="910" y="125" width="240" height="95" rx="8" class="b"/><text x="1030" y="160" text-anchor="middle" class="s">RouteValidation</text><text x="1030" y="188" text-anchor="middle" class="n">경로 검증</text>
+<rect x="1230" y="125" width="220" height="95" rx="8" class="b"/><text x="1340" y="160" text-anchor="middle" class="s">Visualization</text><text x="1340" y="188" text-anchor="middle" class="n">결과 출력</text>
+<path d="M320 172 H480" class="l"/><path d="M750 172 H910" class="l"/><path d="M1150 172 H1230" class="l"/>
+<text x="400" y="147" text-anchor="middle" class="x">×</text><text x="400" y="206" text-anchor="middle" class="n">좌표계 불일치</text>
+<rect x="310" y="260" width="610" height="110" rx="8" class="d"/><text x="615" y="294" text-anchor="middle" class="s">실행조건 평가</text><text x="615" y="325" text-anchor="middle" class="n">frame deficit = 1 → R(W) &gt; θ</text><text x="615" y="350" text-anchor="middle" class="n">보완 필요 판정</text><path d="M615 220 V260" class="l"/>
+<text x="70" y="445" class="s">(b) 보완 후보 비교 및 선택</text>
+<rect x="90" y="485" width="340" height="135" rx="8" class="b"/><text x="260" y="520" text-anchor="middle" class="s">후보 r1: CoordinateTransform</text><text x="260" y="552" text-anchor="middle" class="n">잔여 위험도: 낮음</text><text x="260" y="580" text-anchor="middle" class="n">추가 지연: 작음 / 호출 +1</text><text x="260" y="605" text-anchor="middle" class="n">J(r1) 최소</text>
+<rect x="580" y="485" width="340" height="135" rx="8" class="b"/><text x="750" y="520" text-anchor="middle" class="s">후보 r2: PositionRefresh+Transform</text><text x="750" y="552" text-anchor="middle" class="n">잔여 위험도: 낮음</text><text x="750" y="580" text-anchor="middle" class="n">추가 지연: 큼 / 호출 +2</text><text x="750" y="605" text-anchor="middle" class="n">J(r2) &gt; J(r1)</text>
+<rect x="1070" y="485" width="340" height="135" rx="8" class="b"/><text x="1240" y="520" text-anchor="middle" class="s">후보 r3: 보완 없음</text><text x="1240" y="552" text-anchor="middle" class="n">잔여 위험도: 높음</text><text x="1240" y="580" text-anchor="middle" class="n">추가 비용: 0</text><text x="1240" y="605" text-anchor="middle" class="n">위험 감소 조건 미충족</text>
+<path d="M260 620 V675 H750" class="l"/>
+<text x="70" y="735" class="s">(c) 보완된 최종 실행계획</text>
+<rect x="65" y="770" width="220" height="80" rx="8" class="b"/><text x="175" y="803" text-anchor="middle" class="s">GetOwnPosition</text><text x="175" y="830" text-anchor="middle" class="n">WGS84</text>
+<rect x="365" y="770" width="240" height="80" rx="8" class="b"/><text x="485" y="803" text-anchor="middle" class="s">CoordinateTransform</text><text x="485" y="830" text-anchor="middle" class="n">WGS84 → ENU</text>
+<rect x="685" y="770" width="220" height="80" rx="8" class="b"/><text x="795" y="803" text-anchor="middle" class="s">RoutePlanning</text><text x="795" y="830" text-anchor="middle" class="n">ENU 입력 만족</text>
+<rect x="985" y="770" width="220" height="80" rx="8" class="b"/><text x="1095" y="803" text-anchor="middle" class="s">RouteValidation</text><text x="1095" y="830" text-anchor="middle" class="n">경로 검증</text>
+<rect x="1280" y="770" width="180" height="80" rx="8" class="b"/><text x="1370" y="803" text-anchor="middle" class="s">결과 출력</text><text x="1370" y="830" text-anchor="middle" class="n">최종 계획</text>
+<path d="M285 810 H365" class="l"/><path d="M605 810 H685" class="l"/><path d="M905 810 H985" class="l"/><path d="M1205 810 H1280" class="l"/>
+<path d="M750 675 V710 H485 V770" class="l"/><text x="630" y="700" class="n">r1 선택</text>
+</svg>
