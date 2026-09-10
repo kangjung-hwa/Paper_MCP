@@ -1,22 +1,24 @@
 # 원문 기준 수정표시본
 
-각 Word 파일에는 해당 원본 Markdown 파일의 전체 내용이 들어 있습니다.
+각 Markdown 파일에는 해당 원본 Markdown 파일의 전체 내용이 들어 있습니다.
 
 - 검은색: 기존부터 있던 내용
-- 파란색 굵은 글씨: 이번 최종 점검에서 바뀌거나 추가된 부분
+- `🔵`와 굵은 글씨: 이번 최종 점검에서 바뀌거나 추가된 부분
 - 원본 제출 파일: 색상 표시 없이 깨끗한 상태로 유지
+
+> GitHub Markdown은 임의 글자색을 항상 표시하지 않으므로, 수정 부분을 놓치지 않도록 파란 원 표시와 굵은 글씨를 함께 사용했습니다.
 
 ## 논문
 
-- `IEIE_ABSTRACT_SHORT_수정표시본.docx`: `paper/IEIE_ABSTRACT_SHORT.md` 전체와 수정된 TSR 수치
+- `IEIE_ABSTRACT_SHORT_수정표시본.md`: `paper/IEIE_ABSTRACT_SHORT.md` 전체와 수정된 TSR 수치
 - 논문 본문 `paper/IEIE_FULL_PAPER_DRAFT.md`는 이미 TSR 86.7%로 작성되어 있어 수정표시본이 필요하지 않음
 
 ## 특허
 
-- `직무발명신고서_수정표시본.docx`: `patent/직무발명신고서.md` 전체
-- `권리청구범위_수정표시본.docx`: `patent/권리청구범위.md` 전체
-- `4_도면_제출용_수정표시본.docx`: `patent/4_도면_제출용.md` 전체
-- `도면부호_수정표시본.docx`: `patent/도면부호.md` 전체
+- `직무발명신고서_수정표시본.md`: `patent/직무발명신고서.md` 전체
+- `권리청구범위_수정표시본.md`: `patent/권리청구범위.md` 전체
+- `4_도면_제출용_수정표시본.md`: `patent/4_도면_제출용.md` 전체
+- `도면부호_수정표시본.md`: `patent/도면부호.md` 전체
 
 ## 도면
 
