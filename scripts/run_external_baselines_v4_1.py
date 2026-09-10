@@ -322,7 +322,7 @@ def _read_csv(path: Path) -> list[dict]:
 def _write_ordered_csv(path: Path, rows: list[dict], fields: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -666,7 +666,7 @@ Their execution behavior is no longer identical. MIRROR applies pre-execution co
 
 Proposed has higher OEPVR/TSR than all external baselines in this controlled run: OEPVR={proposed['OEPVR']:.3f}, TSR={proposed['TSR']:.3f}. It is not uniformly cheaper. Direct Tool-Planning has fewer calls and lower latency. MIRROR has fewer calls and approximately the same latency. Tool-MVR has fewer calls than Proposed but higher latency because failed execution and retry costs are counted.
 
-Strict vs Proposed remains an ablation, not an external baseline. From the preserved v3 operational-validity results, Strict OEPVR/TSR={strict_oepv:.3f}/{strict_tsr:.3f}; Proposed OEPVR/TSR={prop_oepv:.3f}/{prop_tsr:.3f}. Proposed reduces repair rate by 52.7 percentage points, OURR by 5.6 percentage points, average added latency by 10.0 ms, and average tool calls by 0.06 relative to Strict.
+Strict vs Proposed remains an ablation, not an external baseline. From the v3 workflows re-evaluated with the current operational-validity and task-success oracles, Strict OEPVR/TSR={strict_oepv:.3f}/{strict_tsr:.3f}; Proposed OEPVR/TSR={prop_oepv:.3f}/{prop_tsr:.3f}. Proposed reduces repair rate by 52.7 percentage points, OURR by 5.6 percentage points, average added latency by 10.0 ms, and average tool calls by 0.06 relative to Strict.
 
 Risk-Cost vs Risk-only: Risk-only TSR={float(risk_only.get('TSR', 0.0)):.3f}, added latency={float(risk_only.get('avg_added_latency', risk_only.get('AvgAddedLatency', 0.0))):.1f}; Risk-Cost TSR={float(risk_cost.get('TSR', 0.0)):.3f}, added latency={float(risk_cost.get('avg_added_latency', risk_cost.get('AvgAddedLatency', 0.0))):.1f}.
 

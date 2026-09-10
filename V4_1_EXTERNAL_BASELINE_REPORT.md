@@ -27,7 +27,7 @@ Tool-MVR-inspired implements deterministic post-execution error observation, ref
 | Direct Tool-Planning | 0.533 | 0.580 | 0.700 | 6.167 | 0.000 | 1380.5 | 0.0 |
 | MIRROR-inspired | 0.600 | 0.666 | 0.700 | 6.500 | 0.333 | 1542.0 | 140.0 |
 | Tool-MVR-inspired | 0.600 | 0.666 | 0.700 | 7.167 | 1.500 | 1818.8 | 495.1 |
-| Proposed | 0.772 | 0.832 | 0.914 | 7.366 | 0.473 | 1541.7 | 43.7 |
+| Proposed | 0.772 | 0.832 | 0.867 | 7.366 | 0.473 | 1541.7 | 43.7 |
 
 ## 5. MIRROR vs Tool-MVR
 
@@ -37,11 +37,11 @@ Their execution behavior is no longer identical. MIRROR applies pre-execution co
 
 ## 6. Proposed External Comparison
 
-Proposed has higher OEPVR/TSR than all external baselines in this controlled run: OEPVR=0.832, TSR=0.914. It is not uniformly cheaper. Direct Tool-Planning has fewer calls and lower latency. MIRROR has fewer calls and approximately the same latency. Tool-MVR has fewer calls than Proposed but higher latency because failed execution and retry costs are counted.
+Proposed has higher OEPVR/TSR than all external baselines in this controlled run: OEPVR=0.832, TSR=0.867. It is not uniformly cheaper. Direct Tool-Planning has fewer calls and lower latency. MIRROR has fewer calls and approximately the same latency. Tool-MVR has fewer calls than Proposed but higher latency because failed execution and retry costs are counted.
 
-Strict vs Proposed remains an ablation, not an external baseline. From the preserved v3 operational-validity results, Strict OEPVR/TSR=0.832/0.914; Proposed OEPVR/TSR=0.832/0.914. Proposed reduces repair rate by 52.7 percentage points, OURR by 5.6 percentage points, average added latency by 10.0 ms, and average tool calls by 0.06 relative to Strict.
+Strict vs Proposed remains an ablation, not an external baseline. From the v3 workflows re-evaluated with the current operational-validity and task-success oracles, Strict OEPVR/TSR=0.832/0.867; Proposed OEPVR/TSR=0.832/0.867. Proposed reduces repair rate by 52.7 percentage points, OURR by 5.6 percentage points, average added latency by 10.0 ms, and average tool calls by 0.06 relative to Strict.
 
-Risk-Cost vs Risk-only: Risk-only TSR=0.914, added latency=53.9; Risk-Cost TSR=0.914, added latency=43.7.
+Risk-Cost vs Risk-only: Risk-only TSR=0.867, added latency=53.9; Risk-Cost TSR=0.867, added latency=43.7.
 
 ## 7. Sanity Warnings
 
@@ -71,7 +71,7 @@ It improves OEPVR from 0.580 to 0.666 and has recovery rate 0.333; TSR remains 0
 Yes. Tool-MVR added calls=1.500, added latency=495.1 ms.
 
 **Q6. Proposed는 reflection baseline 대비 OEPVR/TSR에서 우수한가?**  
-Yes. Proposed OEPVR/TSR=0.832/0.914; MIRROR and Tool-MVR are 0.666/0.700.
+Yes. Proposed OEPVR/TSR=0.832/0.867; MIRROR and Tool-MVR are 0.666/0.700.
 
 **Q7. Proposed는 latency/tool calls 측면에서도 우수한가?**  
 Not uniformly. Proposed latency is lower than Tool-MVR but about equal to MIRROR and higher than Direct; Proposed uses more calls than all three external baselines in this run.

@@ -26,6 +26,6 @@ def write_csv(path: Path, rows: list[dict]) -> None:
         return
     fields = sorted({k for r in rows for k in r})
     with path.open("w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fields)
+        writer = csv.DictWriter(f, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)

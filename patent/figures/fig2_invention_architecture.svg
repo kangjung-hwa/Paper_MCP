@@ -14,7 +14,7 @@
 <path d="M330 326 H390" class="l"/><path d="M590 326 H650" class="l"/><path d="M850 326 H910" class="l"/>
 <rect x="250" y="450" width="220" height="72" rx="7" class="b"/><text x="360" y="480" text-anchor="middle" class="s">보완 후보 생성부</text><text x="360" y="505" text-anchor="middle" class="n">180</text>
 <rect x="590" y="450" width="220" height="72" rx="7" class="b"/><text x="700" y="480" text-anchor="middle" class="s">보완 최적화부</text><text x="700" y="505" text-anchor="middle" class="n">190</text>
-<rect x="930" y="450" width="230" height="72" rx="7" class="b"/><text x="1045" y="480" text-anchor="middle" class="s">계획 갱신·재검증부</text><text x="1045" y="505" text-anchor="middle" class="n">200</text>
+<rect x="930" y="450" width="230" height="72" rx="7" class="b"/><text x="1045" y="480" text-anchor="middle" class="s">실행계획 갱신 및</text><text x="1045" y="505" text-anchor="middle" class="n">재검증부 (200)</text>
 <path d="M1010 362 V405 H360 V450" class="l"/><path d="M470 486 H590" class="l"/><path d="M810 486 H930" class="l"/>
 <path d="M1045 450 V405 H490 V362" class="l"/>
 <text x="730" y="397" text-anchor="middle" class="n">재검증 피드백</text>

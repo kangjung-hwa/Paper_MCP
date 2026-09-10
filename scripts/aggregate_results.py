@@ -13,6 +13,8 @@ from src.evaluation.runner import run_one
 from src.evaluation.statistics import bootstrap_ci, mcnemar_counts, paired_mean_effect
 from src.mcp.registry import ToolRegistry
 from src.models.task import TaskInstance
+from src.oracle.oracle_rules import evaluate
+from src.oracle.operational_validity import workflow_from_dict
 from src.tasks.generator import generate_tasks
 from src.utils.serialization import read_jsonl, write_csv
 
@@ -20,6 +22,23 @@ from src.utils.serialization import read_jsonl, write_csv
 def _load_tasks(path, seed):
     rows = read_jsonl(Path(path))
     return [TaskInstance.from_dict(r) for r in rows] if rows else generate_tasks(seed)
+
+
+def _refresh_outcomes(rows, registry):
+    """Re-evaluate saved workflows with the current task-success oracle."""
+    task_maps = {}
+    for seed in [42, 123, 2026]:
+        for task in _load_tasks(f"data/v3/tasks_seed{seed}.jsonl", seed):
+            task_maps[(seed, task.task_id)] = task
+    refreshed = []
+    for row in rows:
+        item = dict(row)
+        dataset_seed = int(item.get("dataset_seed", int(item["seed"]) // 10000))
+        task = task_maps.get((dataset_seed, item["task_id"]))
+        if task is not None and item.get("final_workflow"):
+            item.update(evaluate(workflow_from_dict(item["final_workflow"]), task, registry))
+        refreshed.append(item)
+    return refreshed
 
 
 def _sensitivity(cfg, field, values):
@@ -71,6 +90,7 @@ def main():
     root = Path("results/v3")
     raw_dir = root / "raw"
     summary_dir = root / "summary"
+    registry = ToolRegistry()
     rows = []
     main_methods = {"react", "schema_aware", "strict", "proposed"}
     for path in raw_dir.glob("*_seed*_all.jsonl"):
@@ -79,6 +99,7 @@ def main():
         for path in raw_dir.glob("*_all.jsonl"):
             if not any(path.name.startswith(prefix) for prefix in ["cost_", "downstream_"]):
                 rows.extend([r for r in read_jsonl(path) if r.get("method") in main_methods])
+    rows = _refresh_outcomes(rows, registry)
     summary = summarize(rows)
     write_csv(summary_dir / "main_results.csv", summary)
     write_csv(summary_dir / "by_task_family.csv", summarize(rows, "family"))

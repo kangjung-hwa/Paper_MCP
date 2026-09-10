@@ -20,6 +20,7 @@ from src.evaluation.statistics import bootstrap_ci, mcnemar_counts, paired_mean_
 from src.mcp.registry import ToolRegistry
 from src.models.task import TaskInstance
 from src.models.workflow import Workflow, WorkflowNode
+from src.oracle.oracle_rules import evaluate
 from src.oracle.operational_validity import evaluate_operational_validity, workflow_from_dict
 from src.utils.serialization import read_jsonl, write_csv, write_jsonl
 from src.orchestration.risk import workflow_risk
@@ -32,7 +33,7 @@ ROOT = Path("results/v3_operational_validity")
 def _write_ordered_csv(path: Path, rows: list[dict], fields: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fields)
+        writer = csv.DictWriter(f, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -331,9 +332,13 @@ def main():
                 task = tasks[(dataset_seed, row["task_id"])]
                 wf = workflow_from_dict(row["final_workflow"])
                 op = evaluate_operational_validity(wf, task, registry)
+                outcome = evaluate(wf, task, registry)
                 risk, risk_edges = workflow_risk(wf, task, registry, risk_mode="max", structural_dependency=False)
                 enriched = dict(row)
                 enriched.update(op)
+                # Recompute task success with the current oracle instead of
+                # carrying forward a value produced by an older evaluator.
+                enriched.update(outcome)
                 enriched["GT_schema_connected"] = int(_schema_connectivity(wf, registry))
                 enriched["SCCR"] = op["GT_strict_valid"]
                 enriched["OEPV"] = op["GT_operational_valid"]
