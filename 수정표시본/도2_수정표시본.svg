@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="black"/></marker></defs>
+<style>text{font-family:Arial,'Noto Sans KR',sans-serif;fill:black}.t{font-size:25px;font-weight:bold}.s{font-size:18px}.n{font-size:16px}.b{fill:white;stroke:black;stroke-width:2}.g{fill:white;stroke:black;stroke-width:3}.l{stroke:black;stroke-width:2;fill:none;marker-end:url(#a)}</style>
+<text x="700" y="38" text-anchor="middle" class="t">도 2. 본 발명의 전체 시스템 블록도</text>
+<rect x="40" y="90" width="220" height="70" rx="7" class="b"/><text x="150" y="120" text-anchor="middle" class="s">사용자 요청 인터페이스</text><text x="150" y="145" text-anchor="middle" class="n">110</text>
+<rect x="320" y="90" width="220" height="70" rx="7" class="b"/><text x="430" y="120" text-anchor="middle" class="s">실행계획 생성부</text><text x="430" y="145" text-anchor="middle" class="n">120</text>
+<rect x="860" y="90" width="250" height="70" rx="7" class="b"/><text x="985" y="120" text-anchor="middle" class="s">도구 정보 관리부</text><text x="985" y="145" text-anchor="middle" class="n">130</text>
+<path d="M260 125 H320" class="l"/><path d="M860 125 H540" class="l"/>
+<rect x="80" y="215" width="1140" height="500" rx="12" class="g"/><text x="105" y="247" class="s">다중 도구 실행계획 보완 시스템 (100)</text>
+<rect x="130" y="290" width="200" height="72" rx="7" class="b"/><text x="230" y="320" text-anchor="middle" class="s">의존관계 분석부</text><text x="230" y="345" text-anchor="middle" class="n">140</text>
+<rect x="390" y="290" width="200" height="72" rx="7" class="b"/><text x="490" y="320" text-anchor="middle" class="s">실행조건 평가부</text><text x="490" y="345" text-anchor="middle" class="n">150</text>
+<rect x="650" y="290" width="200" height="72" rx="7" class="b"/><text x="750" y="320" text-anchor="middle" class="s">위험도 산정부</text><text x="750" y="345" text-anchor="middle" class="n">160</text>
+<rect x="910" y="290" width="200" height="72" rx="7" class="b"/><text x="1010" y="320" text-anchor="middle" class="s">보완 결정부</text><text x="1010" y="345" text-anchor="middle" class="n">170</text>
+<path d="M330 326 H390" class="l"/><path d="M590 326 H650" class="l"/><path d="M850 326 H910" class="l"/>
+<rect x="250" y="450" width="220" height="72" rx="7" class="b"/><text x="360" y="480" text-anchor="middle" class="s">보완 후보 생성부</text><text x="360" y="505" text-anchor="middle" class="n">180</text>
+<rect x="590" y="450" width="220" height="72" rx="7" class="b"/><text x="700" y="480" text-anchor="middle" class="s">보완 최적화부</text><text x="700" y="505" text-anchor="middle" class="n">190</text>
+<rect x="930" y="450" width="230" height="72" rx="7" class="b"/><text x="1045" y="480" text-anchor="middle" class="s" style="fill:#0969da;font-weight:700">실행계획 갱신 및</text><text x="1045" y="505" text-anchor="middle" class="n" style="fill:#0969da;font-weight:700">재검증부 (200)</text>
+<path d="M1010 362 V405 H360 V450" class="l"/><path d="M470 486 H590" class="l"/><path d="M810 486 H930" class="l"/>
+<path d="M1045 450 V405 H490 V362" class="l"/>
+<text x="730" y="397" text-anchor="middle" class="n">재검증 피드백</text>
+<rect x="485" y="600" width="230" height="72" rx="7" class="b"/><text x="600" y="630" text-anchor="middle" class="s">도구 실행부</text><text x="600" y="655" text-anchor="middle" class="n">210</text>
+<rect x="790" y="600" width="230" height="72" rx="7" class="b"/><text x="905" y="630" text-anchor="middle" class="s">외부 도구 호출 클라이언트</text><text x="905" y="655" text-anchor="middle" class="n">220</text>
+<path d="M1045 522 V565 H600 V600" class="l"/><path d="M715 636 H790" class="l"/>
+<rect x="1110" y="760" width="250" height="90" rx="7" class="b"/><text x="1235" y="795" text-anchor="middle" class="s">외부 도구 서버</text><text x="1235" y="822" text-anchor="middle" class="n">MCP/API/RPC 등 (230)</text>
+<path d="M905 672 V805 H1110" class="l"/>
+<path d="M985 160 V255 H490 V290" class="l"/><text x="770" y="244" text-anchor="middle" class="n">실제 조건정보(131) / 요구 조건정보(132)</text>
+<path d="M430 160 V200 H230 V290" class="l"/>
+</svg>
